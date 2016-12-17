@@ -17,6 +17,5 @@ class Person():
         self.color = color
 
     # Print his attributes
-    def toString(self):
-        print(personDefineSentence, self.login, ":")
-        print(self.color)
+    def __repr__(self):
+        return str(self.login)+" "+str(self.color)

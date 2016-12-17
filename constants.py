@@ -7,3 +7,4 @@ processesQuestion="Combien de processus voulez-vous creer ?"
 processesSelection="Vous avez selectionne :"
 processWord="processus"
 personDefineSentence="La personne est"
+listOfUsers=[]
