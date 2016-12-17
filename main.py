@@ -8,7 +8,7 @@
 
 ## Main algorithm which manage users interactions and several processes ##
 
-## Import/uses
+## Imports/uses
 from constants import *
 from person import *
 

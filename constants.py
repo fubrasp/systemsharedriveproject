@@ -1,15 +1,33 @@
 #!/usr/bin/python
 # coding=utf-8
 
-## Import/uses
-#from multiprocessing import Process, Manager
+## Imports/uses
+from multiprocessing import Process, Manager
+import sys, getopt, argparse
 
-#manager = Manager()
+
+memoryManager = Manager()
 
 ## Define some constants ##
 
+#Program arguments
+dictArgs = {}
+pseudo="pseudo"
+document="document"
+
+#Questions
 processesQuestion="Combien de processus voulez-vous creer ?"
 processesSelection="Vous avez selectionne :"
 processWord="processus"
+
+#Users
 personDefineSentence="La personne est"
+#users_var
 listOfUsers=[]
+
+#help argv statement
+#coledit
+helpPError="indicate we use a pseudo/login"
+helpPseudoError="pseudo with you sign in"
+helpDError="indicate we want access to a document"
+helpFileAccessError="file you want access"
