@@ -12,6 +12,7 @@
 from constants import *
 from person import *
 
+
 # Start with asking the number of processes
 numberOfProcesses = int(input(processesQuestion))
 print(processesSelection, numberOfProcesses, processWord)
