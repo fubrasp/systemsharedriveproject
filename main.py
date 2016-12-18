@@ -11,6 +11,8 @@
 ## Imports/uses
 from constants import *
 from person import *
+import time
+import mmap
 
 
 # Start with asking the number of processes
@@ -25,3 +27,17 @@ for count in range(numberOfProcesses):
     listOfUsers.append(user)
 
 print(listOfUsers)
+#memoryManager
+
+with open("users", "wb") as usersData:
+    for user in listOfUsers:
+        usersData.write(user.login+":"+user.color+"\n")
+
+while True:
+    try:
+        time.sleep(1)
+    except KeyboardInterrupt:
+        print("Main ended")
+        sys.exit()
+
+

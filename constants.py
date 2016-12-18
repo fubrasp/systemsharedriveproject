@@ -31,3 +31,7 @@ helpPError="indicate we use a pseudo/login"
 helpPseudoError="pseudo with you sign in"
 helpDError="indicate we want access to a document"
 helpFileAccessError="file you want access"
+
+#authenticate process
+isAuthenticated=" is authenticated"
+failToAuthenticate="FAIL TO AUTHENTICATE"

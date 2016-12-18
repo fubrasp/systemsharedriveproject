@@ -3,6 +3,7 @@
 
 ## Imports/uses
 from constants import *
+import mmap
 
 
 # Generic function in order to get args
@@ -14,10 +15,35 @@ def args(listOfArgs):
 
     args = parser.parse_args()
 
-    if args.pseudo:
+    if hasattr(args, 'pseudo'):
         dictArgs[str(pseudo)] = args.pseudo
 
-    if args.document:
+    if hasattr(args, 'document'):
         dictArgs[str(document)] = args.document
 
     return dictArgs
+
+def checkAuthenticate(arguments):
+    currUserArr = []
+    userListed = False
+    with open("users", "r+b") as usersData:
+        # memory-map the file, size 0 means whole file
+        mm = mmap.mmap(usersData.fileno(), 0)
+        # read content via standard file methods
+        for line in mm:
+            currUserArr = str(usersData.readline()[:-1]).split(':')
+            # check if user has the rule for authenticate
+            if currUserArr[0] == arguments[pseudo]:
+                userListed = True
+                break
+        mm.close()
+
+    if userListed:
+        print(arguments[pseudo] + isAuthenticated)
+        return True
+    else:
+        print(failToAuthenticate)
+        return False
+        sys.exit()
+
+
