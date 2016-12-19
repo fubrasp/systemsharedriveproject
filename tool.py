@@ -39,17 +39,21 @@ def checkServerIsRunning(serverCommand):
 def checkAuthenticate(arguments):
     currUserArr = []
     userListed = False
-    with open("users", "r+b") as usersData:
-        # memory-map the file, size 0 means whole file
-        mm = mmap.mmap(usersData.fileno(), 0)
-        # read content via standard file methods
-        for line in mm:
-            currUserArr = str(usersData.readline()[:-1]).split(':')
-            # check if user has the rule for authenticate
-            if currUserArr[0] == arguments[pseudo]:
-                userListed = True
-                break
-        mm.close()
+
+    try:
+        with open("users_"+arguments[document], "r+b") as usersData:
+            # memory-map the file, size 0 means whole file
+            mm = mmap.mmap(usersData.fileno(), 0)
+            # read content via standard file methods
+            for line in mm:
+                currUserArr = str(usersData.readline()[:-1]).split(':')
+                # check if user has the rule for authenticate
+                if currUserArr[0] == arguments[pseudo]:
+                    userListed = True
+                    break
+            mm.close()
+    except IOError:
+        return False
 
     if userListed:
         print(arguments[pseudo] + isAuthenticated)

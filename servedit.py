@@ -28,7 +28,7 @@ for count in range(numberOfProcesses):
 
 print(listOfUsers)
 
-with open("users", "wb") as usersData:
+with open("users_"+arguments[document], "wb") as usersData:
     for user in listOfUsers:
         usersData.write(user.login+":"+user.color+"\n")
 
