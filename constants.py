@@ -6,7 +6,7 @@ from multiprocessing import Process, Manager
 import sys, getopt, argparse
 
 
-memoryManager = Manager()
+#memoryManager = Manager()
 
 ## Define some constants ##
 
@@ -35,3 +35,6 @@ helpFileAccessError="file you want access"
 #authenticate process
 isAuthenticated=" is authenticated"
 failToAuthenticate="FAIL TO AUTHENTICATE"
+
+#Server mananging
+leftServer="Server ended"
