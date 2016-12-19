@@ -4,6 +4,10 @@
 ## Imports/uses
 from constants import *
 import mmap
+import os
+
+
+
 
 
 # Generic function in order to get args
@@ -22,6 +26,15 @@ def args(listOfArgs):
         dictArgs[str(document)] = args.document
 
     return dictArgs
+
+def checkServerIsRunning(serverCommand):
+    os.system(commandCheckServer+ " >tmp")
+    result=open('tmp', 'r').read()
+    if (str(serverCommand) in str(result)):
+        return True
+    else:
+        return False
+
 
 def checkAuthenticate(arguments):
     currUserArr = []

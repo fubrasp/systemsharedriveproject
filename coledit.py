@@ -10,10 +10,16 @@ from coleditargs import *
 #use the arguments define in coleditargs
 arguments = args(listArgs)
 
+serverRunningresult=checkServerIsRunning(str("python servedit.py -d "+arguments[document]))
 authentificationResult=checkAuthenticate(arguments)
+
+print("TEST SERVER IS RUNNING")
+print(serverRunningresult)
 
 print("TEST RESULTAT DE L'AUTHENTIFICATION")
 print(authentificationResult)
+
+
 
 
 
