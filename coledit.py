@@ -13,7 +13,7 @@ arguments = args(listArgs)
 serverRunningresult=checkServerIsRunning(str("python servedit.py -d "+arguments[document]))
 authentificationResult=checkAuthenticate(arguments)
 
-print("TEST SERVER IS RUNNING")
+print("TEST GOOD SERVER IS RUNNING")
 print(serverRunningresult)
 
 print("TEST RESULTAT DE L'AUTHENTIFICATION")

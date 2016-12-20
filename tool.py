@@ -5,9 +5,7 @@
 from constants import *
 import mmap
 import os
-
-
-
+from person import *
 
 
 # Generic function in order to get args
@@ -15,7 +13,7 @@ def args(listOfArgs):
     parser = argparse.ArgumentParser()
     for current in listOfArgs:
         #each node of the list corresponds to an array of two values, the first for the option, the secund for the content of the option
-        parser.add_argument(str(current[0]), str(current[1]), help=helpPError, type=str)
+        parser.add_argument(str(current[0]), str(current[1]), help="", type=str)
 
     args = parser.parse_args()
 
@@ -56,11 +54,25 @@ def checkAuthenticate(arguments):
         return False
 
     if userListed:
-        print(arguments[pseudo] + isAuthenticated)
         return True
     else:
-        print(failToAuthenticate)
         return False
         sys.exit()
 
+def initializeServer(document, numberOfProcesses):
+    # WE ALSO CAN IMPROVE THIS BY GIVING RANDOM NAME AND COLOR
+    # Put the list of users allowed on the server
+    for count in range(numberOfProcesses):
+        currentInteratorString = str(count)
+        user = Person("user" + str(currentInteratorString), "color" + str(currentInteratorString))
+        listOfUsers.append(user)
 
+    with open("users_" + document, "wb") as usersData:
+        for user in listOfUsers:
+            usersData.write(user.login + ":" + user.color + "\n")
+
+    return listOfUsers
+
+def createDocument(document):
+    currentDocument=open(str(document), "wb")
+    return currentDocument
