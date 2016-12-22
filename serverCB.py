@@ -4,6 +4,9 @@
 import socket
 import threading
 
+global numberOfClients
+numberOfClients = 0
+
 
 class ClientThread(threading.Thread):
     def __init__(self, ip, port, clientsocket):
@@ -20,8 +23,12 @@ class ClientThread(threading.Thread):
         print("Ouverture du fichier: ", r, "...")
         fp = open(r, 'rb')
         self.clientsocket.send(fp.read())
-
         print("Client déconnecté...")
+        #global numberOfClients
+        global numberOfClients
+        numberOfClients -= 1
+        print("NOMBRE DE CLIENTS RESTANTS: " + str(numberOfClients))
+
 
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -33,3 +40,6 @@ while True:
     (clientsocket, (ip, port)) = tcpsock.accept()
     newthread = ClientThread(ip, port, clientsocket)
     newthread.start()
+    #global numberOfClients
+    numberOfClients += 1
+    print("NOMBRE DE CLIENTS RESTANTS: "+str(numberOfClients))
