@@ -51,7 +51,7 @@ là on sait envoyer et recevoir du texte (mais on doit):
 #Légende du TO DO
 *pas important
 
-#Fonctionnalités dévellopés (commit cddc3774bd7ffd68b50d333997f5e54f5a15776b)
+#Fonctionnalités dévellopées (commit cddc3774bd7ffd68b50d333997f5e54f5a15776b)
 DANS SERVEDIT.PY ET COLEDIT.PY
 
 *utilisation  des arguments en ligne de commande (bug sur l'indication du help) se base sur coleditargs.py et serveditargs.py 
