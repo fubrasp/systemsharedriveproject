@@ -1,6 +1,7 @@
 # systemsharedriveproject
 project for Ms. Christine BOURJOT
 
+UTILISER Python 3.6 et un système UNIX
 ###DEADLINE 03/01/2017 ###
 
 #file meaning
