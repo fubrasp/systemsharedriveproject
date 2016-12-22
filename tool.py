@@ -76,3 +76,19 @@ def initializeServer(document, numberOfProcesses):
 def createDocument(document):
     currentDocument=open(str(document), "wb")
     return currentDocument
+
+#def saveSessionFile(document):
+
+def editFile(document):
+    os.system("vim "+document)
+
+def endSession(document, message):
+    os.system("git add "+document)
+    os.system("git commit -m "+message+"")
+    #os.system("git push")
+
+def initHistory(dossier):
+    os.system('git init '+dossier)
+
+def followHistory(document):
+    os.system("git log")

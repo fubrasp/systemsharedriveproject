@@ -38,6 +38,8 @@ failToAuthenticate="FAIL TO AUTHENTICATE"
 
 #Server mananging
 leftServer="Server ended"
+leftClient="Client ended"
+
 
 #command for check server is running
 commandCheckServer="ps ax | grep servedit.py | head -1"
