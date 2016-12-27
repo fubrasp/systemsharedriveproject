@@ -34,6 +34,7 @@ if (authentificationResult and serverRunningresult):
     textToSend = input(">> ")
     # send to the server the data, it can be a string
     #s.send(file_name.encode())
+    #s.send(textToSend.encode())
     s.send(textToSend.encode())
     # put the file in a custom directory
     #file_name = FILES_DIRECTORY + '/%s' % (file_name,)

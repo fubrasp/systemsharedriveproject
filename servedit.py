@@ -53,7 +53,7 @@ class ClientThread(threading.Thread):
         r = self.clientsocket.recv(2048)
         #print("Nous traitons la demande d'accès au fichier demandé...")
         print("Nous avons reçu le texte")
-        print(str(r))
+        print(r.decode())
 
         #print("Ouverture du fichier : ", r, "...")
         #fp = open(r, 'rb')
