@@ -46,6 +46,9 @@ if (authentificationResult and serverRunningresult):
 
     #print("TEST EDITION FICHIER")
     #editFile(arguments[document])
+
+    #Creer un fichier
+
 else:
     if (serverRunningresult == False):
         print("SERVER IS NOT RUNNING, PLEASE START THE SERVER")

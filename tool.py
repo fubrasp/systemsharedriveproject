@@ -76,7 +76,7 @@ def initializeServer(document, numberOfProcesses):
 def createDocument(document):
     # with open("users_" + document, "wb") as newDocument:
     #    newDocument.write("#shared document "+document)
-    currentDocument = open(str(document), "wb")
+    currentDocument = open(str(document), "w")
     # return currentDocument
 
 
