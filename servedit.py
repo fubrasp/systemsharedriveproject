@@ -9,7 +9,7 @@ from serveditargs import *
 import socket
 import threading
 
-# --> USAGE
+# --> USAGE : servedit -d <document>
 
 # On vérifie les arguments
 arguments = args(listArgs)

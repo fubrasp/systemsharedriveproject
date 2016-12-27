@@ -1,15 +1,12 @@
 #!/usr/bin/python
 # coding=utf-8
 
-## Imports/uses
-# we don t need to re import constants.py which is already import in tool.py
+# IMPORTS
 from tool import *
 from coleditargs import *
 import socket
 
-# USAGE
-# coledit -p <pseudo> -d <document>
-# use the arguments define in coleditargs
+# ==> USAGE : coledit -p <pseudo> -d <document>
 arguments = args(listArgs)
 
 serverRunningresult = True  # checkServerIsRunning(str("Python servedit.py -d "+arguments[document]))
@@ -17,24 +14,26 @@ authentificationResult = True  # checkAuthenticate(arguments)
 
 # print(testServerIsRunning)
 # print(serverRunningresult)
-
 # print(testAuthentificationIsWorking)
 # print(authentificationResult)
 
 if (authentificationResult and serverRunningresult):
-    # vient du code modifie de l'exemple
-    # initialize socket and connect to the server
+
+    # Paramètres d'initialisation du client pour communiquer avec le serveur
+
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(("", 1111))
 
     print("Vous allez travailler sur le document : " + arguments[document])
-    # En boucle on peut ajouter du texte
+
+    # On boucle tant que le client ne quitte pas il peut écrire :
+
     textToSend = input(">> ")
     while textToSend not in LEFT_EDITOR:
-        ##A chaque ajout :
-        # on clean la console
+        # À chaque ajout, on nettoie la console
         cleanConsole()
-        # on affiche le document affiche le document
+
+        # On affiche le document
         displayDoc(FILES_DIRECTORY + arguments[document])
 
         textToSend = input(">> ")
