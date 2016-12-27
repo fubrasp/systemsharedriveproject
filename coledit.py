@@ -38,6 +38,7 @@ if (authentificationResult and serverRunningresult):
         # On affiche le document
         displayDoc(FILES_DIRECTORY + arguments[document])
 
+        print("Tapez exit pour quitter l'édition du fichier " + arguments[document])
         textToSend = input(">> ")
         s.send(textToSend.encode())
 
