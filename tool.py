@@ -68,7 +68,7 @@ def initializeServer(document, numberOfProcesses):
 
     with open(FILES_USERS_DIRECTORY + "users_" + document, "w") as usersData:
         for user in listOfUsers:
-            usersData.write(user.login + ":" + user.color + "\n")
+            usersData.write(user.login + user.color + "\n")
 
     return listOfUsers
 

@@ -25,8 +25,7 @@ listOfUsers = initializeServer(arguments[document], numberOfProcesses)
 
 # Affichage des utilisateurs
 print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
-for i in range (0, len(listOfUsers)):
-    print(listOfUsers[i] + '\n')
+print(listOfUsers)
 
 # Variable globale indiquant le nb de clients connectés au serveur
 global numberOfClients
