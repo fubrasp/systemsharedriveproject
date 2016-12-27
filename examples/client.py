@@ -9,7 +9,7 @@ s.connect(("", 1111))
 print("Le nom du fichier que vous voulez récupérer:")
 file_name = input(">> ") # utilisez raw_input() pour les anciennes versions python
 s.send(file_name.encode())
-file_name = 'data/%s' % (file_name,)
+file_name = 'files/%s' % (file_name,)
 r = s.recv(9999999)
 with open(file_name,'wb') as _file:
     _file.write(r)

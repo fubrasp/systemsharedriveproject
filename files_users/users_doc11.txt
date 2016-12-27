@@ -1,0 +1,2 @@
+user0:color0
+user1:color1

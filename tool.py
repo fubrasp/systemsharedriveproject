@@ -63,10 +63,10 @@ def initializeServer(document, numberOfProcesses):
     # Put the list of users allowed on the server
     for count in range(numberOfProcesses):
         currentInteratorString = str(count)
-        user = Person("user" + str(currentInteratorString), "color" + str(currentInteratorString))
+        user = Person("Utilisateur n°" + str(currentInteratorString), "(Couleur " + str(currentInteratorString) + ")")
         listOfUsers.append(user)
 
-    with open("users_" + document, "w") as usersData:
+    with open(FILES_USERS_DIRECTORY + "users_" + document, "w") as usersData:
         for user in listOfUsers:
             usersData.write(user.login + ":" + user.color + "\n")
 

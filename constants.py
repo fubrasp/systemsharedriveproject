@@ -42,7 +42,8 @@ leftClient="Client déconnecté."
 IS_LISTENING="En attente de connexions..."
 
 ##FILES DIRECTORY
-FILES_DIRECTORY="data/"
+FILES_DIRECTORY="files/"
+FILES_USERS_DIRECTORY="files_users/"
 
 ##TESTING
 testServerIsRunning="TEST GOOD SERVER IS RUNNING"
