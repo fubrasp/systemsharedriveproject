@@ -16,12 +16,12 @@ pseudo="pseudo"
 document="document"
 
 #Questions
-processesQuestion="Combien d'utilisateurs voulez-vous creer sur le document?"
-processesSelection="Vous avez selectionne :"
+processesQuestion="À combien d'utilisateurs l'accès sera-t-il autorisé sur ce document ?"
+processesSelection="Vous avez selectionné :"
 processWord="processus"
 
 #Users
-personDefineSentence="La personne est"
+personDefineSentence="La personne est "
 #users_var
 listOfUsers=[]
 
@@ -37,9 +37,9 @@ isAuthenticated=" is authenticated"
 failToAuthenticate="FAIL TO AUTHENTICATE"
 
 #Server mananging
-leftServer="Server ended"
-leftClient="Client déconnecté"
-IS_LISTENING="En ecoute..."
+leftServer="Serveur hors-ligne."
+leftClient="Client déconnecté."
+IS_LISTENING="En attente de connexions..."
 
 ##FILES DIRECTORY
 FILES_DIRECTORY="data"

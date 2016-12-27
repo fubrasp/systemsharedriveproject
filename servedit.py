@@ -16,16 +16,16 @@ import threading
 #On verifie les arguments
 arguments = args(listArgs)
 #on creer le fichier - verif des cas d'erreurs
-currentDocument=createDocument(arguments[document])
+currentDocument = createDocument(arguments[document])
 
 #demander le nombre d'utilisateurs
 numberOfProcesses = int(input(processesQuestion))
 
 #creer les utilisateurs suivant le nombre demande en leur associant une couleur
-listOfUsers=initializeServer(arguments[document], numberOfProcesses)
+listOfUsers = initializeServer(arguments[document], numberOfProcesses)
 
 #affiche les utilisateurs creer cf variable precedente
-print("TEST LIST USERS")
+print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
 print(listOfUsers)
 
 #vient du code modifie de l'exemple
@@ -51,9 +51,9 @@ class ClientThread(threading.Thread):
         print("Connection de %s %s" % (self.ip, self.port,))
 
         r = self.clientsocket.recv(2048)
-        print("TRAITEMENT DEMANDE D'ACCES FICHIER")
+        print("Nous traitons la demande d'accès au fichier demandé...")
 
-        print("Ouverture du fichier: ", r, "...")
+        print("Ouverture du fichier : ", r, "...")
         fp = open(r, 'rb')
         self.clientsocket.send(fp.read())
 
@@ -62,7 +62,7 @@ class ClientThread(threading.Thread):
         print(leftClient)
         global numberOfClients
         numberOfClients -= 1
-        print("NOMBRE DE CLIENTS RESTANTS: " + str(numberOfClients))
+        print("Nombre de clients restants : " + str(numberOfClients))
 
 #initialize socket
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -79,4 +79,4 @@ while True:
     newthread.start()
     #ajout du client
     numberOfClients += 1
-    print("NOMBRE DE CLIENTS RESTANTS: "+str(numberOfClients))
+    print("Nombre de clients restants : "+str(numberOfClients))

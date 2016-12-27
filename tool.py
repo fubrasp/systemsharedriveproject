@@ -74,10 +74,10 @@ def initializeServer(document, numberOfProcesses):
 
 
 def createDocument(fileName):
-    if os.path.exists("data/" + fileName) == False :
-        os.system("touch data/" + fileName)
+    if os.path.exists(FILES_DIRECTORY + "/" + fileName) == False :
+        os.system("touch " + FILES_DIRECTORY + "/" + fileName)
     else :
-        print(fileName + " ALREADY EXISTS")
+        print("Le fichier " + fileName + " existe déjà ! Choisissez un autre nom")
         sys.exit()
 
 # def saveSessionFile(document):
