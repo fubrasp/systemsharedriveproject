@@ -50,10 +50,22 @@ class ClientThread(threading.Thread):
     def run(self):
         print("Connection de %s %s" % (self.ip, self.port,))
 
-        r = self.clientsocket.recv(2048)
-        print("Nous avons reçu le texte")
-        print(r.decode())
+        BUFF_SIZE = 35  # 4 KiB
+        data = ""
+        while True:
+            part = self.clientsocket.recv(BUFF_SIZE)
+            data += part.decode()
+            #r = self.clientsocket.recv(2048)
+            print("Nous avons reçu le texte")
+            print(data)
 
+            print("***TAILLE DU PAQUET***")
+            print(sys.getsizeof(part))
+            print("***TAILLE DU PAQUET***")
+
+            if sys.getsizeof(part) < BUFF_SIZE:
+                # either 0 or end of data
+                break
 
         #print("Ouverture du fichier : ", r, "...")
         #fp = open(r, 'rb')
