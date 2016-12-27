@@ -16,23 +16,31 @@ serverRunningresult=checkServerIsRunning(str("python servedit.py -d "+arguments[
 authentificationResult=checkAuthenticate(arguments)
 
 
-print("TEST GOOD SERVER IS RUNNING")
+print(testServerIsRunning)
 print(serverRunningresult)
 
-print("TEST RESULTAT DE L'AUTHENTIFICATION")
+print(testAuthentificationIsWorking)
 print(authentificationResult)
 
 #vient du code modifie de l'exemple
+#initialize socket and connect to the server
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(("", 1111))
 
+#unuseful
 print("Le nom du fichier surlequel voulez travailler:")
+#Just ask something to user and print nice ask line
 file_name = input(">> ")
+#send to the server the data, it can be a string
 s.send(file_name.encode())
-file_name = 'data/%s' % (file_name,)
+#put the file in a custom directory
+file_name = FILES_DIRECTORY+'/%s' % (file_name,)
+#receive the data
 r = s.recv(9999999)
+#write the file using the read data
 with open(file_name,'wb') as _file:
     _file.write(r)
+#print what happen
 print("Le fichier a été correctement créer ou ouvert dans : %s." % file_name)
 
 #print("TEST EDITION FICHIER")

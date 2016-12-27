@@ -39,7 +39,15 @@ failToAuthenticate="FAIL TO AUTHENTICATE"
 #Server mananging
 leftServer="Server ended"
 leftClient="Client ended"
+IS_LISTENING="En ecoute..."
 
+##FILES DIRECTORY
+FILES_DIRECTORY="data"
 
+##TESTING
+testServerIsRunning="TEST GOOD SERVER IS RUNNING"
+testAuthentificationIsWorking="TEST RESULTAT DE L'AUTHENTIFICATION"
+
+##COMMANDS
 #command for check server is running
 commandCheckServer="ps ax | grep servedit.py | head -1"
