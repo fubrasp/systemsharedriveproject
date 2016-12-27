@@ -74,6 +74,9 @@ def initializeServer(document, numberOfProcesses):
 
 
 def createDocument(document):
+    #if file not exists
+    #os.sytem('touch document')
+
     # with open("users_" + document, "wb") as newDocument:
     #    newDocument.write("#shared document "+document)
     currentDocument = open(str(document), "w")
