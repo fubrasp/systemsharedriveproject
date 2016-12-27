@@ -29,6 +29,11 @@ def args(listOfArgs):
 def checkServerIsRunning(serverCommand):
     os.system(commandCheckServer + " >tmp")
     result = open('tmp', 'r').read()
+
+    print("DEBUG")
+    print(str(serverCommand))
+    print(str(result))
+
     if (str(serverCommand) in str(result)):
         return True
     else:
