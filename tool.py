@@ -73,15 +73,12 @@ def initializeServer(document, numberOfProcesses):
     return listOfUsers
 
 
-def createDocument(document):
-    #if file not exists
-    #os.sytem('touch document')
-
-    # with open("users_" + document, "wb") as newDocument:
-    #    newDocument.write("#shared document "+document)
-    currentDocument = open(str(document), "w")
-    # return currentDocument
-
+def createDocument(fileName):
+    if os.path.exists("data/" + fileName) == False :
+        os.system("touch data/" + fileName)
+    else :
+        print(fileName + " ALREADY EXISTS")
+        sys.exit()
 
 # def saveSessionFile(document):
 
@@ -101,3 +98,5 @@ def initHistory(dossier):
 
 def followHistory(document):
     os.system("git log")
+
+createDocument('aFile.txt')
