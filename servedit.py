@@ -19,7 +19,7 @@ arguments = args(listArgs)
 currentDocument = createDocument(arguments[document])
 
 #demander le nombre d'utilisateurs
-numberOfProcesses = int(input(processesQuestion))
+numberOfProcesses = int(input(processesQuestion + arguments[document] + " ?"))
 
 #creer les utilisateurs suivant le nombre demande en leur associant une couleur
 listOfUsers = initializeServer(arguments[document], numberOfProcesses)

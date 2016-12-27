@@ -16,7 +16,7 @@ pseudo="pseudo"
 document="document"
 
 #Questions
-processesQuestion="À combien d'utilisateurs l'accès sera-t-il autorisé sur ce document ?"
+processesQuestion="À combien d'utilisateurs l'accès sera-t-il autorisé sur le document "
 processesSelection="Vous avez selectionné :"
 processWord="processus"
 
