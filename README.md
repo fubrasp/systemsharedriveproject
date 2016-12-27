@@ -67,3 +67,19 @@ DANS SERVERCB.PY ET CLIENTCB.PY
 serveur gérant plusieurs threads
 
 *afficher le nombre de client (à chaque connexion/déconnexion sur la vue serveur)
+
+#INSTALLER L'ENVIRONNEMENT NECESSAIRE AU PROJET
+Dans l'idéal pour travailler efficacement:
+INSTALLER:
+
+Mac:
+
+Python:
+https://www.python.org/ftp/python/3.6.0/python-3.6.0-macosx10.6.pkg
+
+Prérequis à l'IDE (JAVA SE SDK) si pas installé:
+http://download.oracle.com/otn-pub/java/jdk/8u112-b16/jdk-8u112-macosx-x64.dmg
+
+IDE:
+https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=mac
+
