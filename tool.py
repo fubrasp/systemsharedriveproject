@@ -12,7 +12,7 @@ from person import *
 def args(listOfArgs):
     parser = argparse.ArgumentParser()
     for current in listOfArgs:
-        #each node of the list corresponds to an array of two values, the first for the option, the secund for the content of the option
+        # each node of the list corresponds to an array of two values, the first for the option, the secund for the content of the option
         parser.add_argument(str(current[0]), str(current[1]), help="", type=str)
 
     args = parser.parse_args()
@@ -25,9 +25,10 @@ def args(listOfArgs):
 
     return dictArgs
 
+
 def checkServerIsRunning(serverCommand):
-    os.system(commandCheckServer+ " >tmp")
-    result=open('tmp', 'r').read()
+    os.system(commandCheckServer + " >tmp")
+    result = open('tmp', 'r').read()
     if (str(serverCommand) in str(result)):
         return True
     else:
@@ -39,7 +40,7 @@ def checkAuthenticate(arguments):
     userListed = False
 
     try:
-        with open("users_"+arguments[document], "r+b") as usersData:
+        with open("users_" + arguments[document], "r+b") as usersData:
             # memory-map the file, size 0 means whole file
             mm = mmap.mmap(usersData.fileno(), 0)
             # read content via standard file methods
@@ -59,6 +60,7 @@ def checkAuthenticate(arguments):
         return False
         sys.exit()
 
+
 def initializeServer(document, numberOfProcesses):
     # WE ALSO CAN IMPROVE THIS BY GIVING RANDOM NAME AND COLOR
     # Put the list of users allowed on the server
@@ -73,22 +75,29 @@ def initializeServer(document, numberOfProcesses):
 
     return listOfUsers
 
-def createDocument(document):
-    currentDocument=open(str(document), "wb")
-    return currentDocument
 
-#def saveSessionFile(document):
+def createDocument(document):
+    #with open("users_" + document, "wb") as newDocument:
+    #    newDocument.write("#shared document "+document)
+    currentDocument = open(str(document), "wb")
+    #return currentDocument
+
+
+# def saveSessionFile(document):
 
 def editFile(document):
-    os.system("vim "+document)
+    os.system("vim " + document)
+
 
 def endSession(document, message):
-    os.system("git add "+document)
-    os.system("git commit -m "+message+"")
-    #os.system("git push")
+    os.system("git add " + document)
+    os.system("git commit -m " + message + "")
+    # os.system("git push")
+
 
 def initHistory(dossier):
-    os.system('git init '+dossier)
+    os.system('git init ' + dossier)
+
 
 def followHistory(document):
     os.system("git log")

@@ -3,6 +3,8 @@
 
 import socket
 import threading
+from tool import *
+
 
 global numberOfClients
 numberOfClients = 0
@@ -20,6 +22,10 @@ class ClientThread(threading.Thread):
         print("Connection de %s %s" % (self.ip, self.port,))
 
         r = self.clientsocket.recv(2048)
+        print("TRAITEMENT DEMANDE D'ACCES FICHIER")
+        #os.system("")
+        #echo $?
+
         print("Ouverture du fichier: ", r, "...")
         fp = open(r, 'rb')
         self.clientsocket.send(fp.read())
