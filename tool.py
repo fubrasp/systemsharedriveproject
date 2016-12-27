@@ -74,8 +74,8 @@ def initializeServer(document, numberOfProcesses):
 
 
 def createDocument(fileName):
-    if os.path.exists(FILES_DIRECTORY + "/" + fileName) == False :
-        os.system("touch " + FILES_DIRECTORY + "/" + fileName)
+    if os.path.exists(FILES_DIRECTORY + fileName) == False :
+        os.system("touch " + FILES_DIRECTORY + fileName)
     else :
         print("Le fichier " + fileName + " existe déjà ! Choisissez un autre nom")
         sys.exit()
@@ -98,3 +98,24 @@ def initHistory(dossier):
 
 def followHistory(document):
     os.system("git log")
+
+#fonctions sytemes usuelles
+def cleanConsole():
+    os.system('clear')
+
+# on choisit une approche non systeme pour ne pas perdre en interactivite
+def displayDoc(document):
+    try:
+        with io.open(document, "r", encoding="utf-8") as _file:
+            for line in _file:
+                print(line)
+    except IOError:
+        print("***FAIL READ DOCUMENT***")
+
+def writeInDoc(document, text):
+    try:
+        with io.open(document, "a", encoding="utf-8") as _file:
+            _file.write(text)
+            _file.close()
+    except IOError:
+        print("***FAIL WRITE DOCUMENT***")

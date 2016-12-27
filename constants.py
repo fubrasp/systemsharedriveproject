@@ -42,7 +42,7 @@ leftClient="Client déconnecté."
 IS_LISTENING="En attente de connexions..."
 
 ##FILES DIRECTORY
-FILES_DIRECTORY="data"
+FILES_DIRECTORY="data/"
 
 ##TESTING
 testServerIsRunning="TEST GOOD SERVER IS RUNNING"
@@ -52,3 +52,6 @@ testAuthentificationIsWorking="TEST RESULTAT DE L'AUTHENTIFICATION"
 #command for check server is running
 #commandCheckServer="ps ax | grep servedit.py | head -1"
 commandCheckServer="ps ax | grep servedit.py | tail -1"
+
+##EDITOR COMMANDS
+LEFT_EDITOR="exit"

@@ -50,7 +50,7 @@ class ClientThread(threading.Thread):
     def run(self):
         print("Connection de %s %s" % (self.ip, self.port,))
 
-        BUFF_SIZE = 35  # 4 KiB
+        BUFF_SIZE = 35  # 35 Bytes
         data = ""
         while True:
             part = self.clientsocket.recv(BUFF_SIZE)
@@ -62,8 +62,9 @@ class ClientThread(threading.Thread):
             print("***TAILLE DU PAQUET***")
             print(sys.getsizeof(part))
             print("***TAILLE DU PAQUET***")
+            writeInDoc(FILES_DIRECTORY+arguments[document], part.decode())
 
-            if sys.getsizeof(part) < BUFF_SIZE:
+            if ((sys.getsizeof(part) < BUFF_SIZE) or (LEFT_EDITOR in part.decode())):
                 # either 0 or end of data
                 break
 

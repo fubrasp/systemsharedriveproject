@@ -27,11 +27,16 @@ if (authentificationResult and serverRunningresult):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(("", 1111))
 
-    ##unuseful
     print("Vous allez travailler sur le document : " + arguments[document])
-    # Just ask something to user and print nice ask line
+    # En boucle on peut ajouter du texte
     textToSend = input(">> ")
-    while textToSend not in "exit":
+    while textToSend not in LEFT_EDITOR:
+        ##A chaque ajout :
+        # on clean la console
+        cleanConsole()
+        # on affiche le document affiche le document
+        displayDoc(FILES_DIRECTORY+arguments[document])
+
         textToSend = input(">> ")
         s.send(textToSend.encode())
 
