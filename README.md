@@ -60,10 +60,6 @@ DANS SERVEDIT.PY ET COLEDIT.PY
 
 *serveur qui initialise et créer les utilisateurs, gère la gestion des accès pour chaque document
 
-tout ca en monothread
-
-DANS SERVERCB.PY ET CLIENTCB.PY
-
 serveur gérant plusieurs threads
 
 *afficher le nombre de client (à chaque connexion/déconnexion sur la vue serveur)
