@@ -1,12 +1,8 @@
 #!/usr/bin/python
 # coding=utf-8
 
-## Imports/uses
-from constants import *
-import mmap
-import os
-import io
-import re
+# IMPORTS
+import os, io, argparse
 from person import *
 
 # Generic function in order to get args
