@@ -12,7 +12,7 @@ import socket
 #use the arguments define in coleditargs
 arguments = args(listArgs)
 
-serverRunningresult=checkServerIsRunning(str("Python servedit.py -d "+arguments[document]))
+serverRunningresult=True#checkServerIsRunning(str("Python servedit.py -d "+arguments[document]))
 authentificationResult=checkAuthenticate(arguments)
 
 
@@ -47,10 +47,10 @@ if (authentificationResult and serverRunningresult):
     #print("TEST EDITION FICHIER")
     #editFile(arguments[document])
 else:
-    if (serverRunningresult==False):
+    if (serverRunningresult == False):
         print("SERVER IS NOT RUNNING, PLEASE START THE SERVER")
 
-    if (authentificationResult==False):
+    if (authentificationResult == False):
         print("AUTHENTIFICATION FAILED PLEASE VERIFY YOU HAVE CHOOSE GOOD CREDENTIALS (user and document)")
 
 
