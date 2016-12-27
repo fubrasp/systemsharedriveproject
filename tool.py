@@ -98,5 +98,3 @@ def initHistory(dossier):
 
 def followHistory(document):
     os.system("git log")
-
-createDocument('aFile.txt')
