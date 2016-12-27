@@ -12,7 +12,7 @@ import socket
 #use the arguments define in coleditargs
 arguments = args(listArgs)
 
-serverRunningresult=checkServerIsRunning(str("python servedit.py -d "+arguments[document]))
+serverRunningresult=checkServerIsRunning(str("Python servedit.py -d "+arguments[document]))
 authentificationResult=checkAuthenticate(arguments)
 
 

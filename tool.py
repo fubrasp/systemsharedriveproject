@@ -6,7 +6,9 @@ from constants import *
 import mmap
 import os
 import io
+import re
 from person import *
+
 
 
 # Generic function in order to get args
@@ -35,7 +37,6 @@ def checkServerIsRunning(serverCommand):
     else:
         return False
 
-
 def checkAuthenticate(arguments):
     currUserArr = []
     userListed = False
@@ -52,7 +53,7 @@ def checkAuthenticate(arguments):
                 #EN FUCKING PYTHON 3.5.2 il traite non pas comme une ligne mais comme chaque caractere!!!
                 #print("LIGNE")
                 #print(line)
-                print(currUserArr)
+                #print(currUserArr)
                 if currUserArr[0] == arguments[pseudo]:
                     #print("***OK***")
                     userListed = True
@@ -72,7 +73,7 @@ def initializeServer(document, numberOfProcesses):
     # WE ALSO CAN IMPROVE THIS BY GIVING RANDOM NAME AND COLOR
     # Put the list of users allowed on the server
     for count in range(numberOfProcesses):
-        currentInteratorString = str(count)
+        currentInteratorString = str(count+1)
         user = Person("user" + str(currentInteratorString), "color" + str(currentInteratorString))
         listOfUsers.append(user)
 
