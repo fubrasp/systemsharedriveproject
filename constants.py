@@ -1,61 +1,44 @@
 #!/usr/bin/python
 # coding=utf-8
 
-## Imports/uses
-from multiprocessing import Process, Manager
-import sys, getopt, argparse
+# ==> FICHIER REGROUPANT TOUTES LES CONSTANTES DE L'ENSEMBUE DU PROJET
 
-
-#memoryManager = Manager()
-
-## Define some constants ##
-
-#Program arguments
+# --> Arguments du programme
 dictArgs = {}
-pseudo="pseudo"
-document="document"
+pseudo = "pseudo"
+document = "document"
 
-#Questions
-processesQuestion="À combien d'utilisateurs l'accès sera-t-il autorisé sur le document "
-processesSelection="Vous avez selectionné :"
-processWord="processus"
+# --> Questions/messages du programme
+processesQuestion = "À combien d'utilisateurs l'accès sera-t-il autorisé sur le document "
+processesSelection = "Vous avez selectionné : "
+processWord = "processus"
 
-#Users
-personDefineSentence="La personne est "
-#users_var
+# --> Message d'identification de l'utilisateur
+personDefineSentence = "La personne est "
 listOfUsers=[]
 
-#help argv statement
-#coledit
-helpPError="indicate we use a pseudo/login"
-helpPseudoError="pseudo with you sign in"
-helpDError="indicate we want access to a document"
-helpFileAccessError="file you want access"
+# --> Messages relatifs à l'authentification
+isAuthenticated = " est authentifié"
+failToAuthenticate = "Erreur d'authentification"
 
-#authenticate process
-isAuthenticated=" is authenticated"
-failToAuthenticate="FAIL TO AUTHENTICATE"
+# --> Messages émis par le serveur
+leftServer = "Serveur hors-ligne."
+leftClient = "Client déconnecté."
+IS_LISTENING = "En attente de connexions..."
 
-#Server mananging
-leftServer="Serveur hors-ligne."
-leftClient="Client déconnecté."
-IS_LISTENING="En attente de connexions..."
+# --> Chemins utilisés durant le projet
+FILES_DIRECTORY = "files/"
+FILES_USERS_DIRECTORY = "files_users/"
 
-##FILES DIRECTORY
-FILES_DIRECTORY="files/"
-FILES_USERS_DIRECTORY="files_users/"
+# --> Messages de test
+testServerIsRunning = "[TEST] : le serveur fonctionne ! "
+testAuthentificationIsWorking = "[TEST] : l'authentification fonctionne !"
 
-##TESTING
-testServerIsRunning="TEST GOOD SERVER IS RUNNING"
-testAuthentificationIsWorking="TEST RESULTAT DE L'AUTHENTIFICATION"
+# --> Commande pour voir si le serveur marche
+commandCheckServer = "ps ax | grep servedit.py | tail -1"
 
-##COMMANDS
-#command for check server is running
-#commandCheckServer="ps ax | grep servedit.py | head -1"
-commandCheckServer="ps ax | grep servedit.py | tail -1"
+# --> Commande pour quitter l'édition d'un fichier
+LEFT_EDITOR = "exit"
 
-##EDITOR COMMANDS
-LEFT_EDITOR="exit"
-
-##MESSAGES
-DATA_SEND="_DBS_"
+# --> Messages
+DATA_SEND = "_DBS_"
