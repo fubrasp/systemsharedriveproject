@@ -51,14 +51,13 @@ class ClientThread(threading.Thread):
         print("Connection de %s %s" % (self.ip, self.port,))
 
         r = self.clientsocket.recv(2048)
-        #print("Nous traitons la demande d'accès au fichier demandé...")
         print("Nous avons reçu le texte")
         print(r.decode())
+
 
         #print("Ouverture du fichier : ", r, "...")
         #fp = open(r, 'rb')
         #self.clientsocket.send(fp.read())
-
 
         #on decremente quand l'user quitte
         print(leftClient)

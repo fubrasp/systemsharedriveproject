@@ -30,31 +30,11 @@ if (authentificationResult and serverRunningresult):
     ##unuseful
     print("Vous allez travailler sur le document : " + arguments[document])
     # Just ask something to user and print nice ask line
-    #file_name = input(">> ")
     textToSend = input(">> ")
-    # send to the server the data, it can be a string
-    #s.send(file_name.encode())
-    #s.send(textToSend.encode())
-    s.send(textToSend.encode())
-    # put the file in a custom directory
-    #file_name = FILES_DIRECTORY + '/%s' % (file_name,)
-    # receive the data
-    #r = s.recv(9999999)
-    # write the file using the read data
-    #with open(file_name, 'wb') as _file:
-    #    _file.write(r)
-    # print what happen
+    while textToSend not in "exit":
+        textToSend = input(">> ")
+        s.send(textToSend.encode())
 
-    ##APRES
-    # open the existing file
-    # add text in file
-    # ask all client to print the file at each add
-    #with open('data/merde.txt', 'w') as _file:
-     #   res = ""
-     #   while res not in "Q":
-     #       res = input(">> ")
-     #       _file.write(res)
-     #   _file.close()
 
 else:
     if (serverRunningresult == False):
