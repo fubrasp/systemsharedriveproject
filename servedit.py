@@ -50,7 +50,7 @@ class ClientThread(threading.Thread):
         while True:
             part = self.clientsocket.recv(BUFF_SIZE)
             data += " " + part.decode()
-            print("Nous avons reçu le texte : " + data)
+            print(part.decode())
 
             writeInDoc(FILES_DIRECTORY + arguments[document], " " + part.decode())
 
