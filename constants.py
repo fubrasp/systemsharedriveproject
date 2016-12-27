@@ -50,4 +50,5 @@ testAuthentificationIsWorking="TEST RESULTAT DE L'AUTHENTIFICATION"
 
 ##COMMANDS
 #command for check server is running
-commandCheckServer="ps ax | grep servedit.py | head -1"
+#commandCheckServer="ps ax | grep servedit.py | head -1"
+commandCheckServer="ps ax | grep servedit.py | tail -1"

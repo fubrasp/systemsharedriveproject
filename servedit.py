@@ -51,6 +51,8 @@ class ClientThread(threading.Thread):
         print("Ouverture du fichier: ", r, "...")
         fp = open(r, 'rb')
         self.clientsocket.send(fp.read())
+
+
         print("Client déconnecté...")
         #global numberOfClients
         global numberOfClients

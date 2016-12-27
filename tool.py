@@ -9,8 +9,6 @@ import io
 import re
 from person import *
 
-
-
 # Generic function in order to get args
 def args(listOfArgs):
     parser = argparse.ArgumentParser()
@@ -32,7 +30,9 @@ def args(listOfArgs):
 def checkServerIsRunning(serverCommand):
     os.system(commandCheckServer + " >tmp")
     result = open('tmp', 'r').read()
-    if (str(serverCommand) in str(result)):
+#    print(str(serverCommand))
+#    print(str(result))
+    if (serverCommand in result):
         return True
     else:
         return False
@@ -43,22 +43,11 @@ def checkAuthenticate(arguments):
 
     try:
         with io.open("users_" + arguments[document], "r", encoding="utf-8") as usersData:
-            #print(usersData)
-            # memory-map the file, size 0 means whole file
-            #mm = mmap.mmap(usersData.fileno(), 0)
-            # read content via standard file methods
             for line in usersData:
-                currUserArr = str(usersData.readline()[:-1]).split(':')
-                # check if user has the rule for authenticate
-                #EN FUCKING PYTHON 3.5.2 il traite non pas comme une ligne mais comme chaque caractere!!!
-                #print("LIGNE")
-                #print(line)
-                #print(currUserArr)
+                currUserArr = str(line[:-1]).split(':')
                 if currUserArr[0] == arguments[pseudo]:
-                    #print("***OK***")
                     userListed = True
                     break
-            #mm.close()
     except IOError:
         print("***FAIL***")
 
@@ -73,7 +62,7 @@ def initializeServer(document, numberOfProcesses):
     # WE ALSO CAN IMPROVE THIS BY GIVING RANDOM NAME AND COLOR
     # Put the list of users allowed on the server
     for count in range(numberOfProcesses):
-        currentInteratorString = str(count+1)
+        currentInteratorString = str(count)
         user = Person("user" + str(currentInteratorString), "color" + str(currentInteratorString))
         listOfUsers.append(user)
 
