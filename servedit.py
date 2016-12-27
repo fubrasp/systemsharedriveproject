@@ -1,96 +1,85 @@
 #!/usr/bin/python
 # coding=utf-8
 
-## Main algorithm which manage users interactions and several processes ##
+# ==> CODE DU SERVEUR DE NOTRE APPLICATION
 
-## Imports/uses
+# --> IMPORT
 from tool import *
 from serveditargs import *
-import time
 import socket
 import threading
 
+# --> USAGE
 
-# USAGE
-#servedit -d <document>
-#On verifie les arguments
+# On vérifie les arguments
 arguments = args(listArgs)
-#on creer le fichier - verif des cas d'erreurs
+
+# On créé le fichier en vérifiant qu'il n'existe pas
 currentDocument = createDocument(arguments[document])
 
-#demander le nombre d'utilisateurs
-numberOfProcesses = int(input(processesQuestion + arguments[document] + " ?"))
+# Nombre d'utilisateurs
+numberOfProcesses = int(input(processesQuestion + arguments[document] + " ? "))
 
-#creer les utilisateurs suivant le nombre demande en leur associant une couleur
+# Création des utilisateurs suivant le nombre soumis + on associe 1 couleur / utilisateur
 listOfUsers = initializeServer(arguments[document], numberOfProcesses)
 
-#affiche les utilisateurs creer cf variable precedente
+# Affichage des utilisateurs
 print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
-print(listOfUsers)
+for i in range (0, len(listOfUsers)):
+    print(listOfUsers[i] + '\n')
 
-#vient du code modifie de l'exemple
-#number of all client who are connected to the server
-#variable globale nombre de personne sur le serveur (clients)
+# Variable globale indiquant le nb de clients connectés au serveur
 global numberOfClients
 numberOfClients = 0
 
-#Thread for each client
-#un thread pour chaque client, ca permet de paralleliser les traitement et surtout d editer le document en meme temps
+# 1 thread / client, ça permet de paralléliser les traitements entre les utilisateurs
 class ClientThread(threading.Thread):
-    #construct the thread
-    #constructeur du thread
+
     def __init__(self, ip, port, clientsocket):
         threading.Thread.__init__(self)
         self.ip = ip
         self.port = port
         self.clientsocket = clientsocket
-        print("[+] Nouveau thread pour %s %s" % (self.ip, self.port,))
+        print("=> Nouveau thread pour %s %s" % (self.ip, self.port,))
 
-    #run method of the thread
     def run(self):
-        print("Connection de %s %s" % (self.ip, self.port,))
+        print("Connexion de %s %s" % (self.ip, self.port,))
 
-        BUFF_SIZE = 35  # 35 Bytes
+        BUFF_SIZE = 35
         data = ""
+
         while True:
             part = self.clientsocket.recv(BUFF_SIZE)
-            data += part.decode()
-            #r = self.clientsocket.recv(2048)
-            print("Nous avons reçu le texte")
-            print(data)
+            data += " " + part.decode()
+            print("Nous avons reçu le texte : " + data)
 
-            print("***TAILLE DU PAQUET***")
-            print(sys.getsizeof(part))
-            print("***TAILLE DU PAQUET***")
-            writeInDoc(FILES_DIRECTORY+arguments[document], part.decode())
+            writeInDoc(FILES_DIRECTORY + arguments[document], " " + part.decode())
 
+            # Mettre fin à la saisie par le client
             if ((sys.getsizeof(part) < BUFF_SIZE) or (LEFT_EDITOR in part.decode())):
-                # either 0 or end of data
                 break
 
-        #print("Ouverture du fichier : ", r, "...")
-        #fp = open(r, 'rb')
-        #self.clientsocket.send(fp.read())
-
-        #on decremente quand l'user quitte
+        # On décrémente quand le client quitte
         print(leftClient)
         global numberOfClients
         numberOfClients -= 1
         print("Nombre de clients restants : " + str(numberOfClients))
 
-#initialize socket
+# Paramètres pour lancer le serveur
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 tcpsock.bind(("", 1111))
 
-#when server is starting wait for ask (no limit of time)
+# Code du serveur :
 while True:
     tcpsock.listen(10)
     print(IS_LISTENING)
     (clientsocket, (ip, port)) = tcpsock.accept()
-    #nouveau client donc nouveau thread
+
+    # Nouveau client = nouveau thread
     newthread = ClientThread(ip, port, clientsocket)
     newthread.start()
-    #ajout du client
+
+    # Ajout du client à la variable globale
     numberOfClients += 1
-    print("Nombre de clients restants : "+str(numberOfClients))
+    print("Nombre de clients restants : " + str(numberOfClients))

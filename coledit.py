@@ -35,7 +35,7 @@ if (authentificationResult and serverRunningresult):
         # on clean la console
         cleanConsole()
         # on affiche le document affiche le document
-        displayDoc(FILES_DIRECTORY+arguments[document])
+        displayDoc(FILES_DIRECTORY + arguments[document])
 
         textToSend = input(">> ")
         s.send(textToSend.encode())
