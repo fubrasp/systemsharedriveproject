@@ -78,3 +78,4 @@ http://download.oracle.com/otn-pub/java/jdk/8u112-b16/jdk-8u112-macosx-x64.dmg
 
 IDE:
 https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=mac
+

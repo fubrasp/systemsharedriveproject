@@ -56,3 +56,6 @@ commandCheckServer="ps ax | grep servedit.py | tail -1"
 
 ##EDITOR COMMANDS
 LEFT_EDITOR="exit"
+
+##MESSAGES
+DATA_SEND="_DBS_"

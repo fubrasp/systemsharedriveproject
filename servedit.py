@@ -52,6 +52,9 @@ class ClientThread(threading.Thread):
             data += " " + part.decode()
             print(part.decode())
 
+            print("TEST TAILLE")
+            print(sys.getsizeof(part.decode()))
+
             writeInDoc(FILES_DIRECTORY + arguments[document], " " + part.decode())
 
             # Mettre fin à la saisie par le client
