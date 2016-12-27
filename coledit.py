@@ -13,7 +13,7 @@ import socket
 arguments = args(listArgs)
 
 serverRunningresult=True#checkServerIsRunning(str("Python servedit.py -d "+arguments[document]))
-authentificationResult=checkAuthenticate(arguments)
+authentificationResult=True#checkAuthenticate(arguments)
 
 
 #print(testServerIsRunning)
@@ -29,24 +29,30 @@ if (authentificationResult and serverRunningresult):
     s.connect(("", 1111))
 
     ##unuseful
-    #print("Le nom du fichier surlequel voulez travailler:")
+    print("Le nom du fichier surlequel voulez travailler:")
     #Just ask something to user and print nice ask line
-    #file_name = input(">> ")
+    file_name = input(">> ")
     #send to the server the data, it can be a string
-    #s.send(file_name.encode())
+    s.send(file_name.encode())
     #put the file in a custom directory
-    #file_name = FILES_DIRECTORY+'/%s' % (file_name,)
+    file_name = FILES_DIRECTORY+'/%s' % (file_name,)
     #receive the data
-    #r = s.recv(9999999)
+    r = s.recv(9999999)
     #write the file using the read data
-    #with open(file_name,'wb') as _file:
-    #    _file.write(r)
+    with open(file_name,'wb') as _file:
+        _file.write(r)
     #print what happen
-    #print("Le fichier a été correctement créer ou ouvert dans : %s." % file_name)
+    print("Le fichier a été correctement créer ou ouvert dans : %s." % file_name)
 
     #open the existing file
     #add text in file
     #ask all client to print the file at each add
+    with open('data/merde.txt', 'w') as _file:
+        res=""
+        while res!="Q":
+            res=input(">> enter some text")
+            _file.write(res)
+        _file.close()
 
 else:
     if (serverRunningresult == False):

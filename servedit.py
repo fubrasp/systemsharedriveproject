@@ -12,6 +12,8 @@ import threading
 # USAGE
 #servedit -d <document>
 arguments = args(listArgs)
+currentDocument=createDocument(arguments[document])
+
 
 ## Main algorithm which manage users interactions and several processes ##
 
@@ -19,7 +21,6 @@ arguments = args(listArgs)
 numberOfProcesses = int(input(processesQuestion))
 
 listOfUsers=initializeServer(arguments[document], numberOfProcesses)
-currentDocument=createDocument(arguments[document])
 
 print("TEST LIST USERS")
 print(listOfUsers)
