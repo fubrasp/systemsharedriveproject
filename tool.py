@@ -5,6 +5,7 @@
 from constants import *
 import mmap
 import os
+import io
 from person import *
 
 
@@ -40,21 +41,23 @@ def checkAuthenticate(arguments):
     userListed = False
 
     try:
-        with open("users_" + arguments[document], "r+b") as usersData:
+        with io.open("users_" + arguments[document], "r", encoding="utf-8") as usersData:
+            #print(usersData)
             # memory-map the file, size 0 means whole file
-            mm = mmap.mmap(usersData.fileno(), 0)
+            #mm = mmap.mmap(usersData.fileno(), 0)
             # read content via standard file methods
-            for line in mm:
+            for line in usersData:
                 currUserArr = str(usersData.readline()[:-1]).split(':')
                 # check if user has the rule for authenticate
                 #EN FUCKING PYTHON 3.5.2 il traite non pas comme une ligne mais comme chaque caractere!!!
-                print("LIGNE")
-                print(line)
+                #print("LIGNE")
+                #print(line)
+                print(currUserArr)
                 if currUserArr[0] == arguments[pseudo]:
-                    print("***OK***")
+                    #print("***OK***")
                     userListed = True
                     break
-            mm.close()
+            #mm.close()
     except IOError:
         print("***FAIL***")
 
