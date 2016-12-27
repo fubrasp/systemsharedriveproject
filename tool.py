@@ -34,24 +34,29 @@ def checkServerIsRunning(serverCommand):
     else:
         return False
 
+
 def checkAuthenticate(arguments):
     currUserArr = []
     userListed = False
 
     try:
-        with open("users_" + arguments[document], "r") as usersData:
+        with open("users_" + arguments[document], "r+b") as usersData:
             # memory-map the file, size 0 means whole file
             mm = mmap.mmap(usersData.fileno(), 0)
             # read content via standard file methods
             for line in mm:
                 currUserArr = str(usersData.readline()[:-1]).split(':')
                 # check if user has the rule for authenticate
+                #EN FUCKING PYTHON 3.5.2 il traite non pas comme une ligne mais comme chaque caractere!!!
+                print("LIGNE")
+                print(line)
                 if currUserArr[0] == arguments[pseudo]:
+                    print("***OK***")
                     userListed = True
                     break
             mm.close()
     except IOError:
-        return False
+        print("***FAIL***")
 
     if userListed:
         return True
@@ -76,10 +81,10 @@ def initializeServer(document, numberOfProcesses):
 
 
 def createDocument(document):
-    #with open("users_" + document, "wb") as newDocument:
+    # with open("users_" + document, "wb") as newDocument:
     #    newDocument.write("#shared document "+document)
     currentDocument = open(str(document), "wb")
-    #return currentDocument
+    # return currentDocument
 
 
 # def saveSessionFile(document):

@@ -16,11 +16,11 @@ serverRunningresult=checkServerIsRunning(str("python servedit.py -d "+arguments[
 authentificationResult=checkAuthenticate(arguments)
 
 
-print(testServerIsRunning)
-print(serverRunningresult)
+#print(testServerIsRunning)
+#print(serverRunningresult)
 
-print(testAuthentificationIsWorking)
-print(authentificationResult)
+#print(testAuthentificationIsWorking)
+#print(authentificationResult)
 
 if (authentificationResult and serverRunningresult):
     #vient du code modifie de l'exemple
