@@ -29,23 +29,17 @@ def args(listOfArgs):
 def checkServerIsRunning(serverCommand):
     os.system(commandCheckServer + " >tmp")
     result = open('tmp', 'r').read()
-
-    print("DEBUG")
-    print(str(serverCommand))
-    print(str(result))
-
     if (str(serverCommand) in str(result)):
         return True
     else:
         return False
-
 
 def checkAuthenticate(arguments):
     currUserArr = []
     userListed = False
 
     try:
-        with open("users_" + arguments[document], "r+b") as usersData:
+        with open("users_" + arguments[document], "r") as usersData:
             # memory-map the file, size 0 means whole file
             mm = mmap.mmap(usersData.fileno(), 0)
             # read content via standard file methods
@@ -74,7 +68,7 @@ def initializeServer(document, numberOfProcesses):
         user = Person("user" + str(currentInteratorString), "color" + str(currentInteratorString))
         listOfUsers.append(user)
 
-    with open("users_" + document, "wb") as usersData:
+    with open("users_" + document, "w") as usersData:
         for user in listOfUsers:
             usersData.write(user.login + ":" + user.color + "\n")
 
