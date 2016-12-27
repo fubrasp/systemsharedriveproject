@@ -2,7 +2,7 @@
 # coding=utf-8
 
 # IMPORTS
-import os, io, argparse
+import os, io, argparse, sys
 from person import *
 
 # Generic function in order to get args
@@ -73,7 +73,8 @@ def createDocument(fileName):
     if os.path.exists(FILES_DIRECTORY + fileName) == False :
         os.system("touch " + FILES_DIRECTORY + fileName)
     else :
-        print("Le fichier " + fileName + " existe déjà ! Choisissez un autre nom")
+        displayDoc(FILES_DIRECTORY + fileName)
+        # print("Le fichier " + fileName + " existe déjà ! Choisissez un autre nom")
         sys.exit()
 
 # def saveSessionFile(document):
@@ -106,7 +107,7 @@ def displayDoc(document):
             for line in _file:
                 print(line)
     except IOError:
-        print("***FAIL READ DOCUMENT***")
+        print("Erreur de lecture du fichier !")
 
 def writeInDoc(document, text):
     try:
@@ -114,4 +115,12 @@ def writeInDoc(document, text):
             _file.write(text)
             _file.close()
     except IOError:
-        print("***FAIL WRITE DOCUMENT***")
+        print("Erreur lors de l'écriture dans le fichier !")
+
+def deleteInDoc(document):
+    try:
+        with io.open(document, "a", encoding="utf-8") as _file:
+            _file.write()
+            _file.close()
+    except IOError:
+        print("Erreur lors d'une modification dans un fichier")
