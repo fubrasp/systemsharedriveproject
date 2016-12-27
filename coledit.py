@@ -1,12 +1,14 @@
 #!/usr/bin/python
 # coding=utf-8
 
-# IMPORTS
+# ==> CODE DU CLIENT DE NOTRE APPLICATION
+
+# --> IMPORTS
 from tool import *
 from coleditargs import *
 import socket
 
-# ==> USAGE : coledit -p <pseudo> -d <document>
+# --> USAGE : coledit -p <pseudo> -d <document>
 arguments = args(listArgs)
 
 serverRunningresult = True  # checkServerIsRunning(str("Python servedit.py -d "+arguments[document]))
