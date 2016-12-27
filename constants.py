@@ -16,7 +16,7 @@ pseudo="pseudo"
 document="document"
 
 #Questions
-processesQuestion="Combien de processus voulez-vous creer ?"
+processesQuestion="Combien d'utilisateurs voulez-vous creer sur le document?"
 processesSelection="Vous avez selectionne :"
 processWord="processus"
 
@@ -38,7 +38,7 @@ failToAuthenticate="FAIL TO AUTHENTICATE"
 
 #Server mananging
 leftServer="Server ended"
-leftClient="Client ended"
+leftClient="Client déconnecté"
 IS_LISTENING="En ecoute..."
 
 ##FILES DIRECTORY

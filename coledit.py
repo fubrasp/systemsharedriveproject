@@ -29,7 +29,7 @@ if (authentificationResult and serverRunningresult):
     s.connect(("", 1111))
 
     ##unuseful
-    print("Le nom du fichier surlequel voulez travailler:")
+    print("vous allez travailler sur : "+arguments[document])
     #Just ask something to user and print nice ask line
     file_name = input(">> ")
     #send to the server the data, it can be a string

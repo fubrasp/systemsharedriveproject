@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # coding=utf-8
 
+## Main algorithm which manage users interactions and several processes ##
+
 ## Imports/uses
 from tool import *
 from serveditargs import *
@@ -11,28 +13,32 @@ import threading
 
 # USAGE
 #servedit -d <document>
+#On verifie les arguments
 arguments = args(listArgs)
+#on creer le fichier - verif des cas d'erreurs
 currentDocument=createDocument(arguments[document])
 
-
-## Main algorithm which manage users interactions and several processes ##
-
-# Start with asking the number of processes
+#demander le nombre d'utilisateurs
 numberOfProcesses = int(input(processesQuestion))
 
+#creer les utilisateurs suivant le nombre demande en leur associant une couleur
 listOfUsers=initializeServer(arguments[document], numberOfProcesses)
 
+#affiche les utilisateurs creer cf variable precedente
 print("TEST LIST USERS")
 print(listOfUsers)
 
 #vient du code modifie de l'exemple
 #number of all client who are connected to the server
+#variable globale nombre de personne sur le serveur (clients)
 global numberOfClients
 numberOfClients = 0
 
 #Thread for each client
+#un thread pour chaque client, ca permet de paralleliser les traitement et surtout d editer le document en meme temps
 class ClientThread(threading.Thread):
     #construct the thread
+    #constructeur du thread
     def __init__(self, ip, port, clientsocket):
         threading.Thread.__init__(self)
         self.ip = ip
@@ -46,16 +52,14 @@ class ClientThread(threading.Thread):
 
         r = self.clientsocket.recv(2048)
         print("TRAITEMENT DEMANDE D'ACCES FICHIER")
-        #os.system("")
-        #echo $?
 
         print("Ouverture du fichier: ", r, "...")
         fp = open(r, 'rb')
         self.clientsocket.send(fp.read())
 
 
-        print("Client déconnecté...")
-        #global numberOfClients
+        #on decremente quand l'user quitte
+        print(leftClient)
         global numberOfClients
         numberOfClients -= 1
         print("NOMBRE DE CLIENTS RESTANTS: " + str(numberOfClients))
@@ -70,18 +74,9 @@ while True:
     tcpsock.listen(10)
     print(IS_LISTENING)
     (clientsocket, (ip, port)) = tcpsock.accept()
-    #new thread
+    #nouveau client donc nouveau thread
     newthread = ClientThread(ip, port, clientsocket)
     newthread.start()
-    #global numberOfClients
+    #ajout du client
     numberOfClients += 1
     print("NOMBRE DE CLIENTS RESTANTS: "+str(numberOfClients))
-
-
-
-#while True:
-#    try:
-#        time.sleep(1)
-#    except KeyboardInterrupt:
-#        print(leftServer)
-#        sys.exit()
