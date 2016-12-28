@@ -124,3 +124,9 @@ def deleteInDoc(document):
             _file.close()
     except IOError:
         print("Erreur lors d'une modification dans un fichier")
+
+def refreshClient(args):
+    # On nettoie la console
+    cleanConsole()
+    # On affiche le document
+    displayDoc(FILES_DIRECTORY + args)

@@ -56,6 +56,12 @@ class ClientThread(threading.Thread):
             print(part.decode())
             writeInDoc(FILES_DIRECTORY + arguments[document], " " + part.decode())
 
+            #notifier chaque clients qu'un client a ecrit
+            for c in clients:
+                c.clientsocket.send(DATA_SEND.encode())
+                #test=c.clientsocket.send(DATA_SEND.encode())
+                #print(test)
+
             # Mettre fin à la saisie par le client
             if ((sys.getsizeof(part) < BUFF_SIZE) or (LEFT_EDITOR in part.decode())):
                 break

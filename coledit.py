@@ -32,15 +32,11 @@ if (authentificationResult and serverRunningresult):
 
     textToSend = input(">> ")
     while textToSend not in LEFT_EDITOR:
-        # À chaque ajout, on nettoie la console
-        cleanConsole()
-
-        # On affiche le document
-        displayDoc(FILES_DIRECTORY + arguments[document])
-
+        refreshClient(arguments[document])
         print("Tapez exit pour quitter l'édition du fichier " + arguments[document])
         textToSend = input(">> ")
         s.send(textToSend.encode())
+
 
 
 else:
