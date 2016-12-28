@@ -27,6 +27,9 @@ listOfUsers = initializeServer(arguments[document], numberOfProcesses)
 print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
 print(listOfUsers)
 
+clients = set()
+
+
 # Variable globale indiquant le nb de clients connectés au serveur
 global numberOfClients
 numberOfClients = 0
@@ -58,10 +61,12 @@ class ClientThread(threading.Thread):
                 break
 
         # On décrémente quand le client quitte
+        clients.remove(self)
         print(leftClient)
         global numberOfClients
         numberOfClients -= 1
         print("Nombre de clients restants : " + str(numberOfClients))
+        print(clients)
 
 # Paramètres pour lancer le serveur
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -76,6 +81,8 @@ while True:
 
     # Nouveau client = nouveau thread
     newthread = ClientThread(ip, port, clientsocket)
+    clients.add(newthread)
+    print(clients)
     newthread.start()
 
     # Ajout du client à la variable globale
