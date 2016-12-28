@@ -1,0 +1,47 @@
+ce que j'ai essaye de faire et qui ne fonctionne pas
+
+Visiblement on ne peut pas utiliser les queue
+https://docs.python.org/3.6/library/queue.html
+
+Donc je me suis dis qu'on pouvait simplement communiquer entre le serveur et le client via des messages codés avec les constantes (1)
+l'idée on référence tous les clients
+
+avec un set() global nommé clients (2) contenant tous les clients (chaque thread lorsqu'il est nouvellement créer est ajouté à ce set) (3)
+(A chaque fois qu'un client se déconnecte il est retiré du set (4))
+
+a chaque fois que le serveur reçoit un paquet et l'ecrit dans le document commun (5). il envoie une notification a chaque client (il parcours le set() de clients et envoie le paquet via le socket du client a chaque client) (6).
+
+normalement chaque client au lieu de boucler sur chaque input, va boucler en permanence et dès qu'il recoit un paquet "DOCUMENT MODIFIE" effectue un refresh ou effectue u refresh lorsque le client ajoute lui même du texte (7)
+
+(1) la constante DATA_SEND dans constants.py
+(2)
+# set de tous les clients
+clients = set()
+clients_lock = threading.Lock()
+(3) clients.add(newthread)
+(4) clients.remove(newthread) | clients.remove(self)
+(5) LIGNE ==> writeInDoc(FILES_DIRECTORY + arguments[document], " " + part.decode())
+(6)
+with clients_lock:
+    for c in clients:
+    c.clientsocket.sendall(DATA_SEND.encode())
+(7)
+while True:
+    print("TEST")
+    print(r.decode())
+    if textToSend not in LEFT_EDITOR:
+        refreshClient()
+        print("Tapez exit pour quitter l'édition du fichier " + arguments[document])
+        textToSend = input(">> ")
+        s.send(textToSend.encode())
+    if r.decode() in DATA_SEND:
+        refreshClient()
+        textToSend=""
+
+def refreshClient():
+    # On nettoie la console
+    cleanConsole()
+
+    # On affiche le document
+    displayDoc(FILES_DIRECTORY + arguments[document])
+
