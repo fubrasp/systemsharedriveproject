@@ -22,8 +22,6 @@ AUTHENTIFICATION_REUSSIE = True  # checkAuthenticate(arguments)
 #    sys.exit(0)
 
 try:
-    ans = True
-    while ans:
         print("""
         1. Ecrire dedans
         2. Supprimer quelque chose dedans
@@ -71,7 +69,7 @@ try:
                         "fichier souhaité")
 
         elif ans == "2":
-            print("Vous voulez supprimer dans " + ARGUMENTS[DOCUMENT] + "\n")
+            print("Vous voulez supprimer du texte de " + ARGUMENTS[DOCUMENT] + "\n")
             supprimerDansDoc(ARGUMENTS[DOCUMENT])
 
         elif ans == "3":

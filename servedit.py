@@ -12,16 +12,16 @@ import threading
 # --> USAGE : servedit -d <document>
 
 # On vérifie les arguments
-arguments = args(LISTE_ARGUMENTS)
+ARGUMENTS = args(LISTE_ARGUMENTS)
 
 # On créé le fichier en vérifiant qu'il n'existe pas
-DOCUMENT_COURANT = creerFichier(arguments[DOCUMENT])
+DOCUMENT_COURANT = creerFichier(ARGUMENTS[DOCUMENT])
 
 # Nombre d'utilisateurs
-NB_UTILISATEURS = int(input(QUESTION_NB_UTILISATEURS + arguments[DOCUMENT] + " ? "))
+NB_UTILISATEURS = int(input(QUESTION_NB_UTILISATEURS + ARGUMENTS[DOCUMENT] + " ? "))
 
 # Création des utilisateurs suivant le nombre soumis + on associe 1 couleur / utilisateur
-LISTE_UTILISATEURS = associerUtilisateursAUnFichier(arguments[DOCUMENT], NB_UTILISATEURS)
+LISTE_UTILISATEURS = associerUtilisateursAUnFichier(ARGUMENTS[DOCUMENT], NB_UTILISATEURS)
 
 # Affichage des utilisateurs
 print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
@@ -53,7 +53,7 @@ class ClientThread(threading.Thread):
             MESSAGE = self.clientsocket.recv(BUFF_SIZE)
             TEXTE_ENTIER += " " + MESSAGE.decode()
             print(MESSAGE.decode())
-            ecrireDansDoc(DOSSIER_FICHIERS_TXT + arguments[DOCUMENT], " " + MESSAGE.decode())
+            ecrireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT], " " + MESSAGE.decode())
 
             # notifier chaque clients qu'un client a ecrit
             for c in clients:

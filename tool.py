@@ -63,11 +63,11 @@ def associerUtilisateursAUnFichier(DOCUMENT, NB_UTILISATEURS):
 def creerFichier(NOM_FICHIER):
     if os.path.exists(DOSSIER_FICHIERS_TXT + NOM_FICHIER) == False :
         os.system("touch " + DOSSIER_FICHIERS_TXT + NOM_FICHIER)
-    else :
-        print("\n=> Le fichier " + NOM_FICHIER + " existe déjà et voici son contenu : \n")
-        lireDansDoc(DOSSIER_FICHIERS_TXT + NOM_FICHIER)
-        print("\n=> Choisissez un nom de fichier non-existant pour lancer le serveur")
-        sys.exit()
+    #else :
+    #    print("\n=> Le fichier " + NOM_FICHIER + " existe déjà et voici son contenu : \n")
+    #    lireDansDoc(DOSSIER_FICHIERS_TXT + NOM_FICHIER)
+    #    print("\n=> Choisissez un nom de fichier non-existant pour lancer le serveur")
+    #    sys.exit()
 
 def modifierFichier(NOM_FICHIER):
     os.system("vim " + NOM_FICHIER)
@@ -98,6 +98,16 @@ def lireDansDoc(NOM_FICHIER):
     except IOError:
         print(MSG_ERREUR_LECTURE_FICHIER)
 
+def lireContenu(NOM_FICHIER):
+    CONTENU = ""
+    try:
+        with io.open(NOM_FICHIER, "r", encoding="utf-8") as _file:
+            for LIGNE in _file:
+                CONTENU += LIGNE
+        return CONTENU
+    except IOError:
+        print(MSG_ERREUR_LECTURE_FICHIER)
+
 def ecrireDansDoc(NOM_FICHIER, TEXTE):
     try:
         with io.open(NOM_FICHIER, "a", encoding="utf-8") as _file:
@@ -107,22 +117,24 @@ def ecrireDansDoc(NOM_FICHIER, TEXTE):
         print(MSG_ERREUR_ECRITURE_FICHIER)
 
 def supprimerDansDoc(NOM_FICHIER):
-    NOUVEAU_CONTENU = ""
 
-    try:
-        with io.open(NOM_FICHIER, "r", encoding="utf-8") as _FILE:
-            TEXTE_A_SUPPRIMER = input(">> ")
+    print("Voici le contenu du fichier " + NOM_FICHIER + " : \n \n" + lireContenu(DOSSIER_FICHIERS_TXT + NOM_FICHIER) + "\n")
+    TEXTE_A_SUPPRIMER = INIT_STRING
 
-            for LIGNE in _FILE:
-                if (TEXTE_A_SUPPRIMER not in LIGNE):
-                    NOUVEAU_CONTENU += LIGNE
+    while TEXTE_A_SUPPRIMER != CMD_QUITTER_EDITION and TEXTE_A_SUPPRIMER != CMD_QUITTER_EDITION.upper():
+        ANCIEN_CONTENU = lireContenu(DOSSIER_FICHIERS_TXT + NOM_FICHIER)
+        print("[TAPEZ EXIT POUR QUITTER]")
+        print("Quelle chaîne de caractères voulez-vous supprimer du fichier " + NOM_FICHIER + " ?\n")
+        TEXTE_A_SUPPRIMER = input(">> ")
+        NOUVEAU_CONTENU = ANCIEN_CONTENU.replace(str(TEXTE_A_SUPPRIMER), "")
 
-        with io.open(NOM_FICHIER, "w", encoding="utf-8") as _FILE:
-            _FILE.write(NOUVEAU_CONTENU)
-            _FILE.close()
+        try:
+            with io.open(DOSSIER_FICHIERS_TXT + NOM_FICHIER, "w", encoding="utf-8") as _FILE:
+                _FILE.write(NOUVEAU_CONTENU)
+                _FILE.close()
+        except IOError: print(MSG_ERREUR_SUPPRESSION_FICHIER)
 
-    except IOError:
-        print(MSG_ERREUR_SUPPRESSION_FICHIER)
+        print("\nLe nouveau contenu du fichier " + NOM_FICHIER + " : \n \n" + NOUVEAU_CONTENU + "\n")
 
 def rafraichirClient(ARGS):
     # On nettoie la console
@@ -131,4 +143,3 @@ def rafraichirClient(ARGS):
     lireDansDoc(DOSSIER_FICHIERS_TXT + ARGS)
     print("Tapez exit pour quitter l'édition du fichier " + ARGS)
     print(">> ")
-
