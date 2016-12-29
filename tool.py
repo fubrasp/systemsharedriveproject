@@ -106,13 +106,22 @@ def ecrireDansDoc(NOM_FICHIER, TEXTE):
         print(MSG_ERREUR_ECRITURE_FICHIER)
 
 def supprimerDansDoc(NOM_FICHIER):
+    NOUVEAU_CONTENU = ""
+
     try:
-        with io.open(NOM_FICHIER, "a", encoding="utf-8") as _file:
-            _file.write()
-            _file.close()
+        with io.open(NOM_FICHIER, "r", encoding="utf-8") as _FILE:
+            TEXTE_A_SUPPRIMER = input(">> ")
+
+            for LIGNE in _FILE:
+                if (TEXTE_A_SUPPRIMER not in LIGNE):
+                    NOUVEAU_CONTENU += LIGNE
+
+        with io.open(NOM_FICHIER, "w", encoding="utf-8") as _FILE:
+            _FILE.write(NOUVEAU_CONTENU)
+            _FILE.close()
+
     except IOError:
         print(MSG_ERREUR_SUPPRESSION_FICHIER)
-
 
 def rafraichirClient(ARGS):
     # On nettoie la console
