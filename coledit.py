@@ -7,7 +7,7 @@
 from tool import *
 from coleditargs import *
 import socket
-
+from threadrafraichir import *
 # --> USAGE : coledit -p <pseudo> -d <document>
 ARGUMENTS = args(LISTE_ARGUMENTS)
 
@@ -26,6 +26,8 @@ if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
     # On boucle tant que le client ne quitte pas il peut écrire :
 
     TEXTE_A_ENVOYER = input(">> ")
+    followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
+    followThread.start()
 
     while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION :
 

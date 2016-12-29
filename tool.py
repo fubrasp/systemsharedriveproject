@@ -112,3 +112,10 @@ def supprimerDansDoc(NOM_FICHIER):
             _file.close()
     except IOError:
         print(MSG_ERREUR_SUPPRESSION_FICHIER)
+
+
+def rafraichirClient(args):
+    # On nettoie la console
+    effacerConsole()
+    # On affiche le document
+    lireDansDoc(DOSSIER_FICHIERS_TXT + args)

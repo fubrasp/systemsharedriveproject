@@ -27,6 +27,8 @@ LISTE_UTILISATEURS = associerUtilisateursAUnFichier(arguments[DOCUMENT], NB_UTIL
 print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
 print(LISTE_UTILISATEURS)
 
+clients = set()
+
 # Variable globale indiquant le nb de clients connectés au serveur
 global NB_CLIENTS_CONNECTES
 NB_CLIENTS_CONNECTES = 0
@@ -53,11 +55,16 @@ class ClientThread(threading.Thread):
             print(MESSAGE.decode())
             ecrireDansDoc(DOSSIER_FICHIERS_TXT + arguments[DOCUMENT], " " + MESSAGE.decode())
 
+            # notifier chaque clients qu'un client a ecrit
+            for c in clients:
+                c.clientsocket.send(DATA_SEND.encode())
+
             # Mettre fin à la saisie par le client
             if (sys.getsizeof(MESSAGE) < BUFF_SIZE) or (CMD_QUITTER_EDITION in MESSAGE.decode()):
                 break
 
         # On décrémente quand le client quitte
+        clients.remove(self)
         print(MSG_CLIENT_HORS_LIGNE)
         global NB_CLIENTS_CONNECTES
         NB_CLIENTS_CONNECTES -= 1
@@ -76,6 +83,7 @@ while True:
 
     # Nouveau client = nouveau thread
     newthread = ClientThread(ip, port, clientsocket)
+    clients.add(newthread)
     newthread.start()
 
     # Ajout du client à la variable globale
