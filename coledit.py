@@ -61,7 +61,6 @@ try:
                     print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
                     TEXTE_A_ENVOYER = input(">> ")
                     s.send(TEXTE_A_ENVOYER.encode())
-                sys.exit(0)
             else:
                 if SERVEUR_EN_LIGNE == False:
                     print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
@@ -83,6 +82,6 @@ try:
             print("Choix invalide, essayez encore. \n")
 
 except KeyboardInterrupt:
-    print(ARGUMENTS[PSEUDO]+" "+MSG_CLIENT_HORS_LIGNE)
+    print(ARGUMENTS[PSEUDO] + " " + MSG_CLIENT_HORS_LIGNE)
     followThread.stop()
-    sys.exit()
+    sys.exit(0)
