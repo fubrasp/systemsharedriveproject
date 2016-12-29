@@ -73,6 +73,8 @@ while ans:
     elif ans == "2":
         print("Vous voulez supprimer dans " + ARGUMENTS[DOCUMENT] + "\n")
 
+        supprimerDansDoc(ARGUMENTS[DOCUMENT])
+
     elif ans != "":
         print("Choix invalide, essayez encore. \n")
 
