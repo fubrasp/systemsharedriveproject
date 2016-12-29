@@ -35,7 +35,7 @@ def verifierAuthentificationReussie(ARGUMENTS):
         with io.open("users_" + ARGUMENTS[DOCUMENT], "r", encoding="utf-8") as DONNEES_UTILISATEURS:
             for LIGNE in DONNEES_UTILISATEURS:
                 TAB_USER_COURANT = str(LIGNE[:-1]).split(':')
-                if TAB_USER_COURANT[0] == ARGUMENTS[pseudo]:
+                if TAB_USER_COURANT[0] == ARGUMENTS[PSEUDO]:
                     USER_TROUVE = True
                     break
     except IOError:
