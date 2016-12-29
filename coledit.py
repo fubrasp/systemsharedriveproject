@@ -22,39 +22,58 @@ def signal_handler(signal, frame):
     print('You pressed Ctrl+C!')
     sys.exit(0)
 
-if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
+ans = True
+while ans:
+    print("""
+    1. Ecrire dedans
+    2. Supprimer quelque chose dedans
+    3. Quitter l'application
+    """)
 
-    # Paramètres d'initialisation du client pour communiquer avec le serveur
+    ans = input("Que voulez-vous faire avec le fichier " + ARGUMENTS[DOCUMENT] + " ? ")
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("", 1111))
+    if ans == "1":
+        print("Vous voulez écrire dans " + ARGUMENTS[DOCUMENT] + "\n")
 
-    print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
+        if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
+            # Paramètres d'initialisation du client pour communiquer avec le serveur
 
-    # On boucle tant que le client ne quitte pas il peut écrire :
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect(("", 1111))
 
-    TEXTE_A_ENVOYER = input(">> ")
-    followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
-    followThread.start()
+            print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
 
-    #signal.signal(signal.SIGINT, signal_handler)
-    #print('Press Ctrl+C')
-    #signal.pause()
-    #followThread.stop()
+            # On boucle tant que le client ne quitte pas il peut écrire :
+            TEXTE_A_ENVOYER = input(">> ")
+            followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
+            followThread.start()
 
-    while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION :
+            # signal.signal(signal.SIGINT, signal_handler)
+            # print('Press Ctrl+C')
+            # signal.pause()
+            # followThread.stop()
 
-        effacerConsole() # À chaque ajout, on nettoie la console
+            while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION:
+                effacerConsole()  # À chaque ajout, on nettoie la console
 
-        lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT]) # On affiche le document
+                lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
 
-        print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
-        TEXTE_A_ENVOYER = input(">> ")
-        s.send(TEXTE_A_ENVOYER.encode())
+                print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
+                TEXTE_A_ENVOYER = input(">> ")
+                s.send(TEXTE_A_ENVOYER.encode())
 
-else:
-    if SERVEUR_EN_LIGNE == False:
-        print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
+        else:
+            if SERVEUR_EN_LIGNE == False:
+                print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
 
-    if AUTHENTIFICATION_REUSSIE == False:
-        print("Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) fichier souhaité")
+            if AUTHENTIFICATION_REUSSIE == False:
+                print("Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) "
+                      "fichier souhaité")
+
+    elif ans == "2":
+        print("Vous voulez supprimer dans " + ARGUMENTS[DOCUMENT] + "\n")
+
+    elif ans != "":
+        print("Choix invalide, essayez encore. \n")
+
+
