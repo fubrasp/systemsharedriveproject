@@ -117,25 +117,15 @@ def ecrireDansDoc(NOM_FICHIER, TEXTE):
     except IOError:
         print(MSG_ERREUR_ECRITURE_FICHIER)
 
-def supprimerDansDoc(NOM_FICHIER):
-
-    print("Voici le contenu du fichier " + NOM_FICHIER + " : \n \n" + lireContenu(DOSSIER_FICHIERS_TXT + NOM_FICHIER) + "\n")
-    TEXTE_A_SUPPRIMER = INIT_STRING
-
-    while TEXTE_A_SUPPRIMER != CMD_QUITTER_EDITION and TEXTE_A_SUPPRIMER != CMD_QUITTER_EDITION.upper():
-        ANCIEN_CONTENU = lireContenu(DOSSIER_FICHIERS_TXT + NOM_FICHIER)
-        print("[TAPEZ EXIT POUR QUITTER]")
-        print("Quelle chaîne de caractères voulez-vous supprimer du fichier " + NOM_FICHIER + " ?\n")
-        TEXTE_A_SUPPRIMER = input(">> ")
+def supprimerDansDoc(NOM_FICHIER, TEXTE_A_SUPPRIMER):
+        ANCIEN_CONTENU = str(lireContenu(DOSSIER_FICHIERS_TXT + NOM_FICHIER))
         NOUVEAU_CONTENU = ANCIEN_CONTENU.replace(str(TEXTE_A_SUPPRIMER), "")
-
         try:
             with io.open(DOSSIER_FICHIERS_TXT + NOM_FICHIER, "w", encoding="utf-8") as _FILE:
                 _FILE.write(NOUVEAU_CONTENU)
                 _FILE.close()
-        except IOError: print(MSG_ERREUR_SUPPRESSION_FICHIER)
-
-        print("\nLe nouveau contenu du fichier " + NOM_FICHIER + " : \n \n" + NOUVEAU_CONTENU + "\n")
+        except IOError:
+            print(MSG_ERREUR_SUPPRESSION_FICHIER)
 
 def rafraichirClient(ARGS):
     # On nettoie la console

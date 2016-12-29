@@ -17,10 +17,6 @@ ARGUMENTS = args(LISTE_ARGUMENTS)
 SERVEUR_EN_LIGNE = True  # verifierServeurEnLigne(str("Python servedit.py -d "+arguments[document]))
 AUTHENTIFICATION_REUSSIE = True  # checkAuthenticate(arguments)
 
-#def signal_handler(signal, frame):
-#    print('You pressed Ctrl+C!')
-#    sys.exit(0)
-
 try:
         print("""
         1. Ecrire dedans
@@ -45,12 +41,8 @@ try:
                 followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
                 followThread.start()
 
-                # signal.signal(signal.SIGINT, signal_handler)
-                # print('Press Ctrl+C')
-                # signal.pause()
-                # followThread.stop()
+                s.send(REP.encode())
                 TEXTE_A_ENVOYER = INIT_STRING
-
                 while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION:
                     effacerConsole()  # À chaque ajout, on nettoie la console
 
@@ -83,7 +75,16 @@ try:
                 followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
                 followThread.start()
 
-                supprimerDansDoc(ARGUMENTS[DOCUMENT])
+                TEXTE_A_SUPPRIMER = INIT_STRING
+                s.send(REP.encode())
+                while TEXTE_A_SUPPRIMER != CMD_QUITTER_EDITION and TEXTE_A_SUPPRIMER != CMD_QUITTER_EDITION.upper():
+                    effacerConsole()  # À chaque ajout, on nettoie la console
+
+                    lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
+
+                    print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
+                    TEXTE_A_SUPPRIMER = input(">> ")
+                    s.send(TEXTE_A_SUPPRIMER.encode())
             else:
                 if SERVEUR_EN_LIGNE == False:
                     print("Le serveur n'est pas en route, lancez-le afin d'y accéder")

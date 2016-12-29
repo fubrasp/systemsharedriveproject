@@ -49,11 +49,17 @@ class ClientThread(threading.Thread):
         BUFF_SIZE = 35
         TEXTE_ENTIER = ""
 
+        MODE= self.clientsocket.recv(BUFF_SIZE)
         while True:
             MESSAGE = self.clientsocket.recv(BUFF_SIZE)
             TEXTE_ENTIER += " " + MESSAGE.decode()
             print(MESSAGE.decode())
-            ecrireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT], " " + MESSAGE.decode())
+
+            if MODE.decode() in "1":
+                ecrireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT], " " + MESSAGE.decode())
+
+            if MODE.decode() in "2":
+                supprimerDansDoc(ARGUMENTS[DOCUMENT], MESSAGE.decode())
 
             # notifier chaque clients qu'un client a ecrit
             for c in clients:
