@@ -22,60 +22,66 @@ def signal_handler(signal, frame):
     print('You pressed Ctrl+C!')
     sys.exit(0)
 
-ans = True
-while ans:
-    print("""
-    1. Ecrire dedans
-    2. Supprimer quelque chose dedans
-    3. Quitter l'application
-    """)
 
-    ans = input("Que voulez-vous faire avec le fichier " + ARGUMENTS[DOCUMENT] + " ? ")
+try:
+    ans = True
+    while ans:
+        print("""
+        1. Ecrire dedans
+        2. Supprimer quelque chose dedans
+        3. Quitter l'application
+        """)
 
-    if ans == "1":
-        print("Vous voulez écrire dans " + ARGUMENTS[DOCUMENT] + "\n")
+        ans = input("Que voulez-vous faire avec le fichier " + ARGUMENTS[DOCUMENT] + " ? ")
 
-        if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
-            # Paramètres d'initialisation du client pour communiquer avec le serveur
+        if ans == "1":
+            print("Vous voulez écrire dans " + ARGUMENTS[DOCUMENT] + "\n")
 
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect(("", 1111))
+            if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
+                # Paramètres d'initialisation du client pour communiquer avec le serveur
 
-            print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.connect(("", 1111))
 
-            # On boucle tant que le client ne quitte pas il peut écrire :
-            TEXTE_A_ENVOYER = input(">> ")
-            followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
-            followThread.start()
+                print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
 
-            # signal.signal(signal.SIGINT, signal_handler)
-            # print('Press Ctrl+C')
-            # signal.pause()
-            # followThread.stop()
-
-            while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION:
-                effacerConsole()  # À chaque ajout, on nettoie la console
-
-                lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
-
-                print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
+                # On boucle tant que le client ne quitte pas il peut écrire :
                 TEXTE_A_ENVOYER = input(">> ")
-                s.send(TEXTE_A_ENVOYER.encode())
+                followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
+                followThread.start()
 
-        else:
-            if SERVEUR_EN_LIGNE == False:
-                print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
+                # signal.signal(signal.SIGINT, signal_handler)
+                # print('Press Ctrl+C')
+                # signal.pause()
+                # followThread.stop()
 
-            if AUTHENTIFICATION_REUSSIE == False:
-                print("Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) "
-                      "fichier souhaité")
+                while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION:
+                    effacerConsole()  # À chaque ajout, on nettoie la console
 
-    elif ans == "2":
-        print("Vous voulez supprimer dans " + ARGUMENTS[DOCUMENT] + "\n")
+                    lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
 
-        supprimerDansDoc(ARGUMENTS[DOCUMENT])
+                    print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
+                    TEXTE_A_ENVOYER = input(">> ")
+                    s.send(TEXTE_A_ENVOYER.encode())
 
-    elif ans != "":
-        print("Choix invalide, essayez encore. \n")
+            else:
+                if SERVEUR_EN_LIGNE == False:
+                    print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
 
+                if AUTHENTIFICATION_REUSSIE == False:
+                    print(
+                        "Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) "
+                        "fichier souhaité")
 
+        elif ans == "2":
+            print("Vous voulez supprimer dans " + ARGUMENTS[DOCUMENT] + "\n")
+
+            supprimerDansDoc(ARGUMENTS[DOCUMENT])
+
+        elif ans != "":
+            print("Choix invalide, essayez encore. \n")
+
+except KeyboardInterrupt:
+    print("Vous voulez quitter")
+    followThread.stop()
+    sys.exit()
