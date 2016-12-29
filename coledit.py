@@ -28,9 +28,9 @@ try:
         3. Quitter l'application
         """)
 
-        ans = input("Que voulez-vous faire avec le fichier " + ARGUMENTS[DOCUMENT] + " ? ")
+        REP = input("Que voulez-vous faire avec le fichier " + ARGUMENTS[DOCUMENT] + " ? ")
 
-        if ans == "1":
+        if REP == "1":
             print("Vous voulez écrire dans " + ARGUMENTS[DOCUMENT] + "\n")
 
             if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
@@ -68,15 +68,36 @@ try:
                         "Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) "
                         "fichier souhaité")
 
-        elif ans == "2":
+        elif REP == "2":
             print("Vous voulez supprimer du texte de " + ARGUMENTS[DOCUMENT] + "\n")
-            supprimerDansDoc(ARGUMENTS[DOCUMENT])
 
-        elif ans == "3":
+            if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
+                # Paramètres d'initialisation du client pour communiquer avec le serveur
+
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.connect(("", 1111))
+
+                print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
+
+                # On boucle tant que le client ne quitte pas il peut écrire :
+                followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
+                followThread.start()
+
+                supprimerDansDoc(ARGUMENTS[DOCUMENT])
+            else:
+                if SERVEUR_EN_LIGNE == False:
+                    print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
+
+                if AUTHENTIFICATION_REUSSIE == False:
+                    print(
+                        "Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) "
+                        "fichier souhaité")
+
+        elif REP == "3":
             print("Vous avez demandé à quitter l'application ! \n")
             sys.exit(0)
 
-        elif ans != "":
+        elif REP != "":
             print("Choix invalide, essayez encore. \n")
 
 except KeyboardInterrupt:

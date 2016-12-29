@@ -100,6 +100,7 @@ def lireDansDoc(NOM_FICHIER):
 
 def lireContenu(NOM_FICHIER):
     CONTENU = ""
+
     try:
         with io.open(NOM_FICHIER, "r", encoding="utf-8") as _file:
             for LIGNE in _file:
