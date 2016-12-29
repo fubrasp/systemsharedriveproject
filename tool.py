@@ -132,5 +132,5 @@ def rafraichirClient(ARGS):
     effacerConsole()
     # On affiche le document
     lireDansDoc(DOSSIER_FICHIERS_TXT + ARGS)
-    print("Tapez exit pour quitter l'édition du fichier " + ARGS)
+    print("[TAPEZ EXIT POUR QUITTER L'EDITION DU FICHIER " + ARGS + "]")
     print(">> ")

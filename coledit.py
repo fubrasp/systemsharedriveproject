@@ -48,7 +48,7 @@ try:
 
                     lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
 
-                    print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
+                    print("[TAPEZ EXIT POUR QUITTER L'EDITION DU FICHIER " + ARGUMENTS[DOCUMENT] + "]")
                     TEXTE_A_ENVOYER = input(">> ")
                     s.send(TEXTE_A_ENVOYER.encode())
             else:
@@ -82,7 +82,7 @@ try:
 
                     lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
 
-                    print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
+                    print("[TAPEZ EXIT POUR QUITTER L'EDITION DU FICHIER " + ARGUMENTS[DOCUMENT] + "]")
                     TEXTE_A_SUPPRIMER = input(">> ")
                     s.send(TEXTE_A_SUPPRIMER.encode())
             else:
