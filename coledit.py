@@ -17,7 +17,6 @@ ARGUMENTS = args(LISTE_ARGUMENTS)
 SERVEUR_EN_LIGNE = True  # verifierServeurEnLigne(str("Python servedit.py -d "+arguments[document]))
 AUTHENTIFICATION_REUSSIE = True  # checkAuthenticate(arguments)
 
-
 #def signal_handler(signal, frame):
 #    print('You pressed Ctrl+C!')
 #    sys.exit(0)
@@ -52,7 +51,8 @@ try:
                 # print('Press Ctrl+C')
                 # signal.pause()
                 # followThread.stop()
-                TEXTE_A_ENVOYER = "ABCD"
+                TEXTE_A_ENVOYER = INIT_STRING
+
                 while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION:
                     effacerConsole()  # À chaque ajout, on nettoie la console
 

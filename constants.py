@@ -48,3 +48,5 @@ SERVER_QUIT = "_SQ_"
 MSG_ERREUR_LECTURE_FICHIER = "Erreur de lecture du fichier !"
 MSG_ERREUR_ECRITURE_FICHIER = "Ecriture impossible dans le fichier !"
 MSG_ERREUR_SUPPRESSION_FICHIER = "Suppression impossible dans le fichier !"
+
+INIT_STRING = "Initialisation chaîne"

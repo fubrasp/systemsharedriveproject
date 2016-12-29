@@ -92,7 +92,7 @@ try:
         print("Nombre de clients restants : " + str(NB_CLIENTS_CONNECTES))
 
 except KeyboardInterrupt:
-    print("Vous quittez le serveur")
+    print(MSG_SERVEUR_HORS_LIGNE)
     for c in clients:
         c.clientsocket.send(SERVER_QUIT.encode())
     sys.exit()

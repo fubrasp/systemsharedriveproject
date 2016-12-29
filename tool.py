@@ -64,8 +64,9 @@ def creerFichier(NOM_FICHIER):
     if os.path.exists(DOSSIER_FICHIERS_TXT + NOM_FICHIER) == False :
         os.system("touch " + DOSSIER_FICHIERS_TXT + NOM_FICHIER)
     else :
-        print("Le contenu du fichier " + NOM_FICHIER + " est le suivant : ")
+        print("\n=> Le fichier " + NOM_FICHIER + " existe déjà et voici son contenu : \n")
         lireDansDoc(DOSSIER_FICHIERS_TXT + NOM_FICHIER)
+        print("\n=> Choisissez un nom de fichier non-existant pour lancer le serveur")
         sys.exit()
 
 def modifierFichier(NOM_FICHIER):
