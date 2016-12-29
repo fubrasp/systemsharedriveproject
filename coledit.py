@@ -74,8 +74,11 @@ try:
 
         elif ans == "2":
             print("Vous voulez supprimer dans " + ARGUMENTS[DOCUMENT] + "\n")
-
             supprimerDansDoc(ARGUMENTS[DOCUMENT])
+
+        elif ans == "3":
+            print("Vous avez demandé à quitter l'application ! \n")
+            sys.exit(0)
 
         elif ans != "":
             print("Choix invalide, essayez encore. \n")
