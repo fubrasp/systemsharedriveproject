@@ -114,8 +114,10 @@ def supprimerDansDoc(NOM_FICHIER):
         print(MSG_ERREUR_SUPPRESSION_FICHIER)
 
 
-def rafraichirClient(args):
+def rafraichirClient(ARGS):
     # On nettoie la console
     effacerConsole()
     # On affiche le document
-    lireDansDoc(DOSSIER_FICHIERS_TXT + args)
+    lireDansDoc(DOSSIER_FICHIERS_TXT + ARGS)
+    print("Tapez exit pour quitter l'édition du fichier " + ARGS)
+

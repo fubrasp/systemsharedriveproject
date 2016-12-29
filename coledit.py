@@ -8,11 +8,19 @@ from tool import *
 from coleditargs import *
 import socket
 from threadrafraichir import *
+import signal
+import sys
+
 # --> USAGE : coledit -p <pseudo> -d <document>
 ARGUMENTS = args(LISTE_ARGUMENTS)
 
 SERVEUR_EN_LIGNE = True  # verifierServeurEnLigne(str("Python servedit.py -d "+arguments[document]))
 AUTHENTIFICATION_REUSSIE = True  # checkAuthenticate(arguments)
+
+
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    sys.exit(0)
 
 if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
 
@@ -29,6 +37,11 @@ if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
     followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
     followThread.start()
 
+    #signal.signal(signal.SIGINT, signal_handler)
+    #print('Press Ctrl+C')
+    #signal.pause()
+    #followThread.stop()
+
     while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION :
 
         effacerConsole() # À chaque ajout, on nettoie la console
@@ -38,7 +51,6 @@ if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
         print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
         TEXTE_A_ENVOYER = input(">> ")
         s.send(TEXTE_A_ENVOYER.encode())
-
 
 else:
     if SERVEUR_EN_LIGNE == False:
