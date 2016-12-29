@@ -45,7 +45,6 @@ try:
                 print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
 
                 # On boucle tant que le client ne quitte pas il peut écrire :
-                TEXTE_A_ENVOYER = input(">> ")
                 followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
                 followThread.start()
 
@@ -53,7 +52,7 @@ try:
                 # print('Press Ctrl+C')
                 # signal.pause()
                 # followThread.stop()
-
+                TEXTE_A_ENVOYER = "ABCD"
                 while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION:
                     effacerConsole()  # À chaque ajout, on nettoie la console
 
@@ -62,7 +61,7 @@ try:
                     print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
                     TEXTE_A_ENVOYER = input(">> ")
                     s.send(TEXTE_A_ENVOYER.encode())
-
+                sys.exit(0)
             else:
                 if SERVEUR_EN_LIGNE == False:
                     print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
