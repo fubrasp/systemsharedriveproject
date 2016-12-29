@@ -13,9 +13,9 @@ def args(LISTE_ARGUMENTS):
 
     ARGUMENTS = PARSEUR.parse_args()
 
-    if hasattr(ARGUMENTS, 'pseudo'): ARGS_LISTE[str(PSEUDO)] = args.pseudo
+    if hasattr(ARGUMENTS, PSEUDO): ARGS_LISTE[str(PSEUDO)] = args.pseudo
 
-    if hasattr(ARGUMENTS, 'document'): ARGS_LISTE[str(DOCUMENT)] = args.document
+    if hasattr(ARGUMENTS, DOCUMENT): ARGS_LISTE[str(DOCUMENT)] = args.document
 
     return ARGS_LISTE
 
