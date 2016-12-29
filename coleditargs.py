@@ -1,3 +1,3 @@
-listArgs=[]
-listArgs.append(["-p", "--pseudo"])
-listArgs.append(["-d", "--document"])
+LISTE_ARGUMENTS = []
+LISTE_ARGUMENTS.append(["-p", "--pseudo"])
+LISTE_ARGUMENTS.append(["-d", "--document"])

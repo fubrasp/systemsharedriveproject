@@ -12,24 +12,24 @@ import threading
 # --> USAGE : servedit -d <document>
 
 # On vérifie les arguments
-arguments = args(listArgs)
+arguments = args(LISTE_ARGUMENTS)
 
 # On créé le fichier en vérifiant qu'il n'existe pas
-currentDocument = createDocument(arguments[document])
+DOCUMENT_COURANT = creerFichier(arguments[DOCUMENT])
 
 # Nombre d'utilisateurs
-numberOfProcesses = int(input(processesQuestion + arguments[document] + " ? "))
+NB_UTILISATEURS = int(input(QUESTION_NB_UTILISATEURS + arguments[DOCUMENT] + " ? "))
 
 # Création des utilisateurs suivant le nombre soumis + on associe 1 couleur / utilisateur
-listOfUsers = initializeServer(arguments[document], numberOfProcesses)
+LISTE_UTILISATEURS = associerUtilisateursAUnFichier(arguments[DOCUMENT], NB_UTILISATEURS)
 
 # Affichage des utilisateurs
 print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
-print(listOfUsers)
+print(LISTE_UTILISATEURS)
 
 # Variable globale indiquant le nb de clients connectés au serveur
-global numberOfClients
-numberOfClients = 0
+global NB_CLIENTS_CONNECTES
+NB_CLIENTS_CONNECTES = 0
 
 # 1 thread / client, ça permet de paralléliser les traitements entre les utilisateurs
 class ClientThread(threading.Thread):
@@ -45,23 +45,23 @@ class ClientThread(threading.Thread):
         print("Connexion de %s %s" % (self.ip, self.port,))
 
         BUFF_SIZE = 35
-        data = ""
+        TEXTE_ENTIER = ""
 
         while True:
-            part = self.clientsocket.recv(BUFF_SIZE)
-            data += " " + part.decode()
-            print(part.decode())
-            writeInDoc(FILES_DIRECTORY + arguments[document], " " + part.decode())
+            MESSAGE = self.clientsocket.recv(BUFF_SIZE)
+            TEXTE_ENTIER += " " + MESSAGE.decode()
+            print(MESSAGE.decode())
+            ecrireDansDoc(DOSSIER_FICHIERS_TXT + arguments[DOCUMENT], " " + MESSAGE.decode())
 
             # Mettre fin à la saisie par le client
-            if ((sys.getsizeof(part) < BUFF_SIZE) or (LEFT_EDITOR in part.decode())):
+            if (sys.getsizeof(MESSAGE) < BUFF_SIZE) or (CMD_QUITTER_EDITION in MESSAGE.decode()):
                 break
 
         # On décrémente quand le client quitte
-        print(leftClient)
-        global numberOfClients
-        numberOfClients -= 1
-        print("Nombre de clients restants : " + str(numberOfClients))
+        print(MSG_CLIENT_HORS_LIGNE)
+        global NB_CLIENTS_CONNECTES
+        NB_CLIENTS_CONNECTES -= 1
+        print("Nombre de clients restants : " + str(NB_CLIENTS_CONNECTES))
 
 # Paramètres pour lancer le serveur
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -71,7 +71,7 @@ tcpsock.bind(("", 1111))
 # Code du serveur :
 while True:
     tcpsock.listen(10)
-    print(IS_LISTENING)
+    print(MSG_SERVEUR_EN_ECOUTE)
     (clientsocket, (ip, port)) = tcpsock.accept()
 
     # Nouveau client = nouveau thread
@@ -79,5 +79,5 @@ while True:
     newthread.start()
 
     # Ajout du client à la variable globale
-    numberOfClients += 1
-    print("Nombre de clients restants : " + str(numberOfClients))
+    NB_CLIENTS_CONNECTES += 1
+    print("Nombre de clients restants : " + str(NB_CLIENTS_CONNECTES))

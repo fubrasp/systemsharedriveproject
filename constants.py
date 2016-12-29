@@ -4,41 +4,46 @@
 # ==> FICHIER REGROUPANT TOUTES LES CONSTANTES DE L'ENSEMBUE DU PROJET
 
 # --> Arguments du programme
-dictArgs = {}
-pseudo = "pseudo"
-document = "document"
+ARGS_LISTE = {}
+PSEUDO = "pseudo"
+DOCUMENT = "document"
 
 # --> Questions/messages du programme
-processesQuestion = "À combien d'utilisateurs l'accès sera-t-il autorisé sur le document "
+QUESTION_NB_UTILISATEURS = "À combien d'utilisateurs l'accès sera-t-il autorisé sur le document "
 processesSelection = "Vous avez selectionné : "
 processWord = "processus"
 
 # --> Message d'identification de l'utilisateur
-personDefineSentence = "La personne est "
-listOfUsers=[]
+DESCRIPTION_PERSONNE = "La personne est "
+LISTE_UTILISATEURS = []
 
 # --> Messages relatifs à l'authentification
-isAuthenticated = " est authentifié"
-failToAuthenticate = "Erreur d'authentification"
+EST_AUTHENTIFIE = " est authentifié"
+NEST_PAS_AUTHENTIFIE = "Erreur d'authentification"
 
 # --> Messages émis par le serveur
-leftServer = "Serveur hors-ligne."
-leftClient = "Client déconnecté."
-IS_LISTENING = "En attente de connexions..."
+MSG_SERVEUR_HORS_LIGNE = "Serveur hors-ligne."
+MSG_CLIENT_HORS_LIGNE = "Client déconnecté."
+MSG_SERVEUR_EN_ECOUTE = "En attente de connexions..."
 
 # --> Chemins utilisés durant le projet
-FILES_DIRECTORY = "files/"
-FILES_USERS_DIRECTORY = "files_users/"
+DOSSIER_FICHIERS_TXT = "files/"
+DOSSIER_UTILISATEURS_FICHIERS_TXT = "files_users/"
 
 # --> Messages de test
-testServerIsRunning = "[TEST] : le serveur fonctionne ! "
-testAuthentificationIsWorking = "[TEST] : l'authentification fonctionne !"
+testServerIsRunning = "TEST => Le serveur fonctionne ! "
+testAuthentificationIsWorking = "TEST => L'authentification fonctionne !"
 
 # --> Commande pour voir si le serveur marche
-commandCheckServer = "ps ax | grep servedit.py | tail -1"
+CMD_VERIFIER_SERVEUR_EN_LIGNE = "ps ax | grep servedit.py | tail -1"
 
 # --> Commande pour quitter l'édition d'un fichier
-LEFT_EDITOR = "exit"
+CMD_QUITTER_EDITION = "exit"
 
 # --> Messages
 DATA_SEND = "_DBS_"
+
+# --> Messages erreur de lecture d'un fichier
+MSG_ERREUR_LECTURE_FICHIER = "Erreur de lecture du fichier !"
+MSG_ERREUR_ECRITURE_FICHIER = "Ecriture impossible dans le fichier !"
+MSG_ERREUR_SUPPRESSION_FICHIER = "Suppression impossible dans le fichier !"

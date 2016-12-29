@@ -9,44 +9,38 @@ from coleditargs import *
 import socket
 
 # --> USAGE : coledit -p <pseudo> -d <document>
-arguments = args(listArgs)
+arguments = args(LISTE_ARGUMENTS)
 
-serverRunningresult = True  # checkServerIsRunning(str("Python servedit.py -d "+arguments[document]))
-authentificationResult = True  # checkAuthenticate(arguments)
+SERVEUR_EN_LIGNE = True  # verifierServeurEnLigne(str("Python servedit.py -d "+arguments[document]))
+AUTHENTIFICATION_REUSSIE = True  # checkAuthenticate(arguments)
 
-# print(testServerIsRunning)
-# print(serverRunningresult)
-# print(testAuthentificationIsWorking)
-# print(authentificationResult)
-
-if (authentificationResult and serverRunningresult):
+if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
 
     # Paramètres d'initialisation du client pour communiquer avec le serveur
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(("", 1111))
 
-    print("Vous allez travailler sur le document : " + arguments[document])
+    print("Vous allez travailler sur le document : " + arguments[DOCUMENT])
 
     # On boucle tant que le client ne quitte pas il peut écrire :
 
-    textToSend = input(">> ")
-    while textToSend not in LEFT_EDITOR:
-        # À chaque ajout, on nettoie la console
-        cleanConsole()
+    TEXTE_A_ENVOYER = input(">> ")
 
-        # On affiche le document
-        displayDoc(FILES_DIRECTORY + arguments[document])
+    while TEXTE_A_ENVOYER not in CMD_QUITTER_EDITION :
 
-        print("Tapez exit pour quitter l'édition du fichier " + arguments[document])
-        textToSend = input(">> ")
-        s.send(textToSend.encode())
+        effacerConsole() # À chaque ajout, on nettoie la console
+
+        lireDansDoc(DOSSIER_FICHIERS_TXT + arguments[DOCUMENT]) # On affiche le document
+
+        print("Tapez exit pour quitter l'édition du fichier " + arguments[DOCUMENT])
+        TEXTE_A_ENVOYER = input(">> ")
+        s.send(TEXTE_A_ENVOYER.encode())
 
 
 else:
-    if (serverRunningresult == False):
+    if SERVEUR_EN_LIGNE == False:
         print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
 
-    if (authentificationResult == False):
-        print(
-            "Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) fichier souhaité")
+    if AUTHENTIFICATION_REUSSIE == False:
+        print("Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) fichier souhaité")

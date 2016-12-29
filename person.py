@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # coding=utf-8
 
-## Imports/uses
+# ==> IMPORTS
 from constants import *
 
-
-## Class which define a person
+# CLASSE POUR DEFINIR UNE PERSONNE
 """
 - login/pseudo
 - color

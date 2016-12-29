@@ -6,121 +6,109 @@ import os, io, argparse, sys
 from person import *
 
 # Generic function in order to get args
-def args(listOfArgs):
-    parser = argparse.ArgumentParser()
-    for current in listOfArgs:
-        # each node of the list corresponds to an array of two values, the first for the option, the secund for the content of the option
-        parser.add_argument(str(current[0]), str(current[1]), help="", type=str)
+def args(LISTE_ARGUMENTS):
+    PARSEUR = argparse.ArgumentParser()
 
-    args = parser.parse_args()
+    for current in LISTE_ARGUMENTS: PARSEUR.add_argument(str(current[0]), str(current[1]), help="", type=str)
 
-    if hasattr(args, 'pseudo'):
-        dictArgs[str(pseudo)] = args.pseudo
+    ARGUMENTS = PARSEUR.parse_args()
 
-    if hasattr(args, 'document'):
-        dictArgs[str(document)] = args.document
+    if hasattr(ARGUMENTS, 'pseudo'): ARGS_LISTE[str(PSEUDO)] = args.pseudo
 
-    return dictArgs
+    if hasattr(ARGUMENTS, 'document'): ARGS_LISTE[str(DOCUMENT)] = args.document
+
+    return ARGS_LISTE
 
 
-def checkServerIsRunning(serverCommand):
-    os.system(commandCheckServer + " >tmp")
-    result = open('tmp', 'r').read()
-#    print(str(serverCommand))
-#    print(str(result))
-    if (serverCommand in result):
-        return True
-    else:
-        return False
+def verifierServeurEnLigne(CMD_SERVEUR):
+    os.system(CMD_VERIFIER_SERVEUR_EN_LIGNE + " >tmp")
+    RES = open('tmp', 'r').read()
 
-def checkAuthenticate(arguments):
-    currUserArr = []
-    userListed = False
+    if CMD_SERVEUR in RES: return True
+    else: return False
+
+def verifierAuthentificationReussie(ARGUMENTS):
+    TAB_USER_COURANT = []
+    USER_TROUVE = False
 
     try:
-        with io.open("users_" + arguments[document], "r", encoding="utf-8") as usersData:
-            for line in usersData:
-                currUserArr = str(line[:-1]).split(':')
-                if currUserArr[0] == arguments[pseudo]:
-                    userListed = True
+        with io.open("users_" + ARGUMENTS[DOCUMENT], "r", encoding="utf-8") as DONNEES_UTILISATEURS:
+            for LIGNE in DONNEES_UTILISATEURS:
+                TAB_USER_COURANT = str(LIGNE[:-1]).split(':')
+                if TAB_USER_COURANT[0] == ARGUMENTS[pseudo]:
+                    USER_TROUVE = True
                     break
     except IOError:
-        print("***FAIL***")
+        print(NEST_PAS_AUTHENTIFIE)
 
-    if userListed:
-        return True
+    if USER_TROUVE: return True
     else:
         return False
         sys.exit()
 
+def associerUtilisateursAUnFichier(DOCUMENT, NB_UTILISATEURS):
 
-def initializeServer(document, numberOfProcesses):
-    # WE ALSO CAN IMPROVE THIS BY GIVING RANDOM NAME AND COLOR
-    # Put the list of users allowed on the server
-    for count in range(numberOfProcesses):
-        currentInteratorString = str(count)
-        user = Person("Utilisateur n°" + str(currentInteratorString), "(Couleur " + str(currentInteratorString) + ")")
-        listOfUsers.append(user)
+    for count in range(NB_UTILISATEURS):
+        COMPTEUR = str(count)
+        UTILISATEUR = Person("Utilisateur n°" + str(COMPTEUR), "(Couleur " + str(COMPTEUR) + ")")
+        LISTE_UTILISATEURS.append(UTILISATEUR)
 
-    with open(FILES_USERS_DIRECTORY + "users_" + document, "w") as usersData:
-        for user in listOfUsers:
-            usersData.write(user.login + user.color + "\n")
+    with open(DOSSIER_UTILISATEURS_FICHIERS_TXT + "users_" + DOCUMENT, "w") as DONNEES_UTILISATEURS:
+        for UTILISATEUR in LISTE_UTILISATEURS:
+            DONNEES_UTILISATEURS.write(UTILISATEUR.login + UTILISATEUR.color + "\n")
 
-    return listOfUsers
+    return LISTE_UTILISATEURS
 
 
-def createDocument(fileName):
-    if os.path.exists(FILES_DIRECTORY + fileName) == False :
-        os.system("touch " + FILES_DIRECTORY + fileName)
+def creerFichier(NOM_FICHIER):
+    if os.path.exists(DOSSIER_FICHIERS_TXT + NOM_FICHIER) == False :
+        os.system("touch " + DOSSIER_FICHIERS_TXT + NOM_FICHIER)
     else :
-        displayDoc(FILES_DIRECTORY + fileName)
+        lireDansDoc(DOSSIER_FICHIERS_TXT + NOM_FICHIER)
         # print("Le fichier " + fileName + " existe déjà ! Choisissez un autre nom")
         sys.exit()
 
-# def saveSessionFile(document):
-
-def editFile(document):
-    os.system("vim " + document)
+def modifierFichier(NOM_FICHIER):
+    os.system("vim " + NOM_FICHIER)
 
 
-def endSession(document, message):
-    os.system("git add " + document)
-    os.system("git commit -m " + message + "")
+def finirSession(NOM_FICHIER, MESSAGE):
+    os.system("git add " + NOM_FICHIER)
+    os.system("git commit -m " + MESSAGE + "")
     # os.system("git push")
 
+def initialiserGitRepo(DOSSIER):
+    os.system("git init " + DOSSIER)
 
-def initHistory(dossier):
-    os.system('git init ' + dossier)
 
-
-def followHistory(document):
-    os.system("git log")
+def suivreGitRepo(DOSSIER):
+    os.system("git log " + DOSSIER)
 
 #fonctions sytemes usuelles
-def cleanConsole():
-    os.system('clear')
+def effacerConsole():
+    os.system("clear")
 
 # on choisit une approche non systeme pour ne pas perdre en interactivite
-def displayDoc(document):
+def lireDansDoc(NOM_FICHIER):
     try:
-        with io.open(document, "r", encoding="utf-8") as _file:
-            for line in _file:
-                print(line)
+        with io.open(NOM_FICHIER, "r", encoding="utf-8") as _file:
+            for LIGNE in _file:
+                print(LIGNE)
     except IOError:
-        print("Erreur de lecture du fichier !")
+        print(MSG_ERREUR_LECTURE_FICHIER)
 
-def writeInDoc(document, text):
+def ecrireDansDoc(NOM_FICHIER, TEXTE):
     try:
-        with io.open(document, "a", encoding="utf-8") as _file:
-            _file.write(text)
+        with io.open(NOM_FICHIER, "a", encoding="utf-8") as _file:
+            _file.write(TEXTE)
             _file.close()
     except IOError:
-        print("Erreur lors de l'écriture dans le fichier !")
+        print(MSG_ERREUR_ECRITURE_FICHIER)
 
-def deleteInDoc(document):
+def supprimerDansDoc(NOM_FICHIER):
     try:
-        with io.open(document, "a", encoding="utf-8") as _file:
+        with io.open(NOM_FICHIER, "a", encoding="utf-8") as _file:
             _file.write()
             _file.close()
     except IOError:
-        print("Erreur lors d'une modification dans un fichier")
+        print(MSG_ERREUR_SUPPRESSION_FICHIER)
