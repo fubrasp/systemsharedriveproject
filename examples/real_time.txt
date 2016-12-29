@@ -3,6 +3,8 @@ ce que j'ai essaye de faire et qui ne fonctionne pas
 Visiblement on ne peut pas utiliser les queue
 https://docs.python.org/3.6/library/queue.html
 
+**Utiliser l'architecture existante client serveur**
+
 Donc je me suis dis qu'on pouvait simplement communiquer entre le serveur et le client via des messages codés avec les constantes (1)
 l'idée on référence tous les clients
 
