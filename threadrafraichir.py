@@ -12,7 +12,8 @@ class RafraichirClientThread(threading.Thread):
         print("=> Nouveau thread suiveur " + self.document)
 
     def run(self):
-        while True:
+        stop=False
+        while (True and (stop==False)):
             donneesRecues = self.sock.recv(9999999).decode()
             rafraichir = donneesRecues in DATA_SEND
             stop = donneesRecues in SERVER_QUIT
@@ -20,6 +21,7 @@ class RafraichirClientThread(threading.Thread):
                 rafraichirClient(self.document)
             if stop:
                 print("***STOP TEST***")
+                os.system('exit')
                 os.system('exit')
                 self.stop()
 
