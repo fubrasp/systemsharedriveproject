@@ -18,10 +18,9 @@ SERVEUR_EN_LIGNE = True  # verifierServeurEnLigne(str("Python servedit.py -d "+a
 AUTHENTIFICATION_REUSSIE = True  # checkAuthenticate(arguments)
 
 
-def signal_handler(signal, frame):
-    print('You pressed Ctrl+C!')
-    sys.exit(0)
-
+#def signal_handler(signal, frame):
+#    print('You pressed Ctrl+C!')
+#    sys.exit(0)
 
 try:
     ans = True
@@ -82,6 +81,6 @@ try:
             print("Choix invalide, essayez encore. \n")
 
 except KeyboardInterrupt:
-    print("Vous voulez quitter")
+    print(ARGUMENTS[PSEUDO]+" "+MSG_CLIENT_HORS_LIGNE)
     followThread.stop()
     sys.exit()

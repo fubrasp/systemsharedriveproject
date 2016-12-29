@@ -75,17 +75,24 @@ tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 tcpsock.bind(("", 1111))
 
-# Code du serveur :
-while True:
-    tcpsock.listen(10)
-    print(MSG_SERVEUR_EN_ECOUTE)
-    (clientsocket, (ip, port)) = tcpsock.accept()
+try:
+    # Code du serveur :
+    while True:
+        tcpsock.listen(10)
+        print(MSG_SERVEUR_EN_ECOUTE)
+        (clientsocket, (ip, port)) = tcpsock.accept()
 
-    # Nouveau client = nouveau thread
-    newthread = ClientThread(ip, port, clientsocket)
-    clients.add(newthread)
-    newthread.start()
+        # Nouveau client = nouveau thread
+        newthread = ClientThread(ip, port, clientsocket)
+        clients.add(newthread)
+        newthread.start()
 
-    # Ajout du client à la variable globale
-    NB_CLIENTS_CONNECTES += 1
-    print("Nombre de clients restants : " + str(NB_CLIENTS_CONNECTES))
+        # Ajout du client à la variable globale
+        NB_CLIENTS_CONNECTES += 1
+        print("Nombre de clients restants : " + str(NB_CLIENTS_CONNECTES))
+
+except KeyboardInterrupt:
+    print("Vous quittez le serveur")
+    for c in clients:
+        c.clientsocket.send(SERVER_QUIT.encode())
+    sys.exit()

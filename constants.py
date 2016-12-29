@@ -42,6 +42,7 @@ CMD_QUITTER_EDITION = "exit"
 
 # --> Messages
 DATA_SEND = "_DBS_"
+SERVER_QUIT = "_SQ_"
 
 # --> Messages erreur de lecture d'un fichier
 MSG_ERREUR_LECTURE_FICHIER = "Erreur de lecture du fichier !"

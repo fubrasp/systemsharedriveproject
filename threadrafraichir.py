@@ -1,6 +1,6 @@
 import threading
 from tool import *
-
+import os
 
 # 1 thread s'éxécute en continue avec le client pour permettre de détecter tout changement (sans bloquer le programme) sur le document et effectuer ainsi le refresh sur la vue client
 class RafraichirClientThread(threading.Thread):
@@ -15,8 +15,13 @@ class RafraichirClientThread(threading.Thread):
         while True:
             donneesRecues = self.sock.recv(9999999).decode()
             rafraichir = donneesRecues in DATA_SEND
+            stop = donneesRecues in SERVER_QUIT
             if rafraichir:
                 rafraichirClient(self.document)
+            if stop:
+                print("***STOP TEST***")
+                os.system('exit')
+                self.stop()
 
     def stop(self):
         self._stop.set()
