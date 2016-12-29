@@ -9,7 +9,7 @@ from coleditargs import *
 import socket
 
 # --> USAGE : coledit -p <pseudo> -d <document>
-arguments = args(LISTE_ARGUMENTS)
+ARGUMENTS = args(LISTE_ARGUMENTS)
 
 SERVEUR_EN_LIGNE = True  # verifierServeurEnLigne(str("Python servedit.py -d "+arguments[document]))
 AUTHENTIFICATION_REUSSIE = True  # checkAuthenticate(arguments)
@@ -21,7 +21,7 @@ if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(("", 1111))
 
-    print("Vous allez travailler sur le document : " + arguments[DOCUMENT])
+    print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
 
     # On boucle tant que le client ne quitte pas il peut écrire :
 
@@ -31,9 +31,9 @@ if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
 
         effacerConsole() # À chaque ajout, on nettoie la console
 
-        lireDansDoc(DOSSIER_FICHIERS_TXT + arguments[DOCUMENT]) # On affiche le document
+        lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT]) # On affiche le document
 
-        print("Tapez exit pour quitter l'édition du fichier " + arguments[DOCUMENT])
+        print("Tapez exit pour quitter l'édition du fichier " + ARGUMENTS[DOCUMENT])
         TEXTE_A_ENVOYER = input(">> ")
         s.send(TEXTE_A_ENVOYER.encode())
 
