@@ -40,3 +40,36 @@ while True:
         refreshClient()
         textToSend=""
 
+def refreshClient():
+    # On nettoie la console
+    cleanConsole()
+
+    # On affiche le document
+    displayDoc(FILES_DIRECTORY + arguments[document])
+
+Solution avec thread qui ne fontionne que a la première edition
+
+# 1 thread s'éxécute en continue avec le client pour permettre de détecter tout changement (sans bloquer le programme) sur le document et effectuer ainsi le refresh sur la vue client
+class ClientRefreshThread(threading.Thread):
+
+    def __init__(self, sock):
+        threading.Thread.__init__(self)
+        self.sock=sock
+        print("=> Nouveau thread suiveur "+arguments[pseudo])
+
+    def run(self):
+        while True:
+            receiveData=s.recv(9999999).decode()
+            checkRefresh= receiveData in DATA_SEND
+            print("TEST REFRESH")
+            print(receiveData)
+            print(checkRefresh)
+            if checkRefresh:
+                refreshClient(arguments[document])
+                print("Tapez exit pour quitter l'édition du fichier " + arguments[document])
+                textToSend = input(">> ")
+                self.sock.send(textToSend.encode())
+                
+                
+followThread= ClientRefreshThread(s)
+followThread.start()
