@@ -134,3 +134,22 @@ def rafraichirClient(ARGS):
     lireDansDoc(DOSSIER_FICHIERS_TXT + ARGS)
     print("[TAPEZ EXIT POUR QUITTER L'EDITION DU FICHIER " + ARGS + "]")
     print(">> ")
+
+
+#def envoyerDonnees(REP, ARGUMENTS, followThread, s):
+#    print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
+#
+#    # On boucle tant que le client ne quitte pas il peut écrire :
+#    followThread.start()
+#
+#    s.send(REP.encode())
+#    TEXTE_A_TRANSMETTRE = INIT_STRING
+#    s.send(REP.encode())
+#    while TEXTE_A_TRANSMETTRE != CMD_QUITTER_EDITION and TEXTE_A_TRANSMETTRE != CMD_QUITTER_EDITION.upper():
+#        effacerConsole()  # À chaque ajout, on nettoie la console
+#
+#        lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
+#
+#        print("[TAPEZ EXIT POUR QUITTER L'EDITION DU FICHIER " + ARGUMENTS[DOCUMENT] + "]")
+#        TEXTE_A_TRANSMETTRE = input(">> ")
+#        s.send(TEXTE_A_TRANSMETTRE.encode())

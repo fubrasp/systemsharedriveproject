@@ -10,16 +10,27 @@ DOCUMENT = "document"
 
 # --> Questions/messages du programme
 QUESTION_NB_UTILISATEURS = "À combien d'utilisateurs l'accès sera-t-il autorisé sur le document "
-processesSelection = "Vous avez selectionné : "
-processWord = "processus"
 
 # --> Message d'identification de l'utilisateur
 DESCRIPTION_PERSONNE = "La personne est "
 LISTE_UTILISATEURS = []
 
+# --> Message serveur hors ligne
+MSG_UILISTEUR_SERVEUR_HORS_LIGNE="Le serveur n'est pas en route, lancez-le afin d'y accéder"
+
 # --> Messages relatifs à l'authentification
-EST_AUTHENTIFIE = " est authentifié"
-NEST_PAS_AUTHENTIFIE = "Erreur d'authentification"
+#EST_AUTHENTIFIE = " est authentifié"
+NEST_PAS_AUTHENTIFIE = "Erreur d'authentification E/S"
+AUTHENTIFICATION_IMPOSSIBLE="Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) " "fichier souhaité"
+
+# --> Texte du menu
+MENU_CHOIX_INVALIDE="Choix invalide, essayez encore. \n"
+MENU_QUITTER_APPLICATION="Vous avez demandé à quitter l'application ! \n"
+MENU="""
+        1. Ecrire dedans
+        2. Supprimer quelque chose dedans
+        3. Quitter l'application
+        """
 
 # --> Messages émis par le serveur
 MSG_SERVEUR_HORS_LIGNE = "Serveur hors-ligne."

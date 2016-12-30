@@ -24,11 +24,7 @@ try:
         s.connect(("", 1111))
         followThread = RafraichirClientThread(s, ARGUMENTS[DOCUMENT])
 
-        print("""
-        1. Ecrire dedans
-        2. Supprimer quelque chose dedans
-        3. Quitter l'application
-        """)
+        print(MENU)
 
         REP = input("Que voulez-vous faire avec le fichier " + ARGUMENTS[DOCUMENT] + " ? ")
 
@@ -73,22 +69,20 @@ try:
                 s.send(TEXTE_A_SUPPRIMER.encode())
 
         elif REP == "3":
-            print("Vous avez demandé à quitter l'application ! \n")
+            print(MENU_QUITTER_APPLICATION)
             sys.exit(0)
 
         elif REP != "":
-            print("Choix invalide, essayez encore. \n")
+            print(MENU_CHOIX_INVALIDE)
 
     else:
         if SERVEUR_EN_LIGNE == False:
             effacerConsole()
-            print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
+            print(MSG_UILISTEUR_SERVEUR_HORS_LIGNE)
 
         if AUTHENTIFICATION_REUSSIE == False:
             effacerConsole()
-            print(
-                "Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) "
-                "fichier souhaité")
+            print(AUTHENTIFICATION_IMPOSSIBLE)
 
 
 except KeyboardInterrupt:
