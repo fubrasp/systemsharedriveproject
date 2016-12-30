@@ -14,10 +14,8 @@ import sys
 # --> USAGE : coledit -p <pseudo> -d <document>
 ARGUMENTS = args(LISTE_ARGUMENTS)
 
-SERVEUR_EN_LIGNE = True  # verifierServeurEnLigne(str("Python servedit.py -d "+arguments[document]))
+SERVEUR_EN_LIGNE = True #verifierServeurEnLigne(str("Python servedit.py -d "+ARGUMENTS[DOCUMENT]))
 AUTHENTIFICATION_REUSSIE = verifierAuthentificationReussie(ARGUMENTS)
-print("TEST AUTHENTIFICATION")
-print(AUTHENTIFICATION_REUSSIE)
 
 try:
     if AUTHENTIFICATION_REUSSIE and SERVEUR_EN_LIGNE:
@@ -83,6 +81,7 @@ try:
 
     else:
         if SERVEUR_EN_LIGNE == False:
+            effacerConsole()
             print("Le serveur n'est pas en route, lancez-le afin d'y accéder")
 
         if AUTHENTIFICATION_REUSSIE == False:
