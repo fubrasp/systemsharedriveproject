@@ -9,7 +9,7 @@ class RafraichirClientThread(threading.Thread):
         self.sock = sock
         self.document = document
         self._stop = threading.Event()
-        print("=> Nouveau thread suiveur " + self.document)
+        print("=> Vous allez travaille sur " + self.document)
 
     def run(self):
         stop=False
