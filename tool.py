@@ -32,7 +32,7 @@ def verifierAuthentificationReussie(ARGUMENTS):
     USER_TROUVE = False
 
     try:
-        with io.open("users_" + ARGUMENTS[DOCUMENT], "r", encoding="utf-8") as DONNEES_UTILISATEURS:
+        with io.open(DOSSIER_UTILISATEURS_FICHIERS_TXT+"users_" + ARGUMENTS[DOCUMENT], "r", encoding="utf-8") as DONNEES_UTILISATEURS:
             for LIGNE in DONNEES_UTILISATEURS:
                 TAB_USER_COURANT = str(LIGNE[:-1]).split(':')
                 if TAB_USER_COURANT[0] == ARGUMENTS[PSEUDO]:
@@ -55,7 +55,7 @@ def associerUtilisateursAUnFichier(DOCUMENT, NB_UTILISATEURS):
 
     with open(DOSSIER_UTILISATEURS_FICHIERS_TXT + "users_" + DOCUMENT, "w") as DONNEES_UTILISATEURS:
         for UTILISATEUR in LISTE_UTILISATEURS:
-            DONNEES_UTILISATEURS.write(UTILISATEUR.login + UTILISATEUR.color + "\n")
+            DONNEES_UTILISATEURS.write(UTILISATEUR.login + ":" + UTILISATEUR.color + "\n")
 
     return LISTE_UTILISATEURS
 
