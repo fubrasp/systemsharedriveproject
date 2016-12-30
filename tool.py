@@ -69,21 +69,17 @@ def creerFichier(NOM_FICHIER):
     #    print("\n=> Choisissez un nom de fichier non-existant pour lancer le serveur")
     #    sys.exit()
 
-def modifierFichier(NOM_FICHIER):
-    os.system("vim " + NOM_FICHIER)
+#def finirSession(NOM_FICHIER, MESSAGE):
+#    os.system("git add " + NOM_FICHIER)
+#    os.system("git commit -m " + MESSAGE + "")
+#    os.system("git push")
+
+#def initialiserGitRepo(DOSSIER):
+#    os.system("git init " + DOSSIER)
 
 
-def finirSession(NOM_FICHIER, MESSAGE):
-    os.system("git add " + NOM_FICHIER)
-    os.system("git commit -m " + MESSAGE + "")
-    # os.system("git push")
-
-def initialiserGitRepo(DOSSIER):
-    os.system("git init " + DOSSIER)
-
-
-def suivreGitRepo(DOSSIER):
-    os.system("git log " + DOSSIER)
+#def suivreGitRepo(DOSSIER):
+#    os.system("git log " + DOSSIER)
 
 #fonctions sytemes usuelles
 def effacerConsole():
