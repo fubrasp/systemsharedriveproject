@@ -19,6 +19,8 @@ serveditargs.py ==> contraintes pour la ligne de commande utilisé par servedit.
 
 threadrafraichir.py ==> thread permettant de rafraichir un client
 
+constants.py ==> toutes les constantes nécéssaires au fonctionnement de l'application
+
 ##TO DO
 
 *Nom et couleur random dans une base de noms
