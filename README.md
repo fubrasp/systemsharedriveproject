@@ -4,18 +4,20 @@ project for system course
 UTILISER Python 3.5.2 et un système UNIX
 ###DEADLINE 03/01/2017 ###
 
-#file meaning
-coledit.py ==> connect an user to a shared document
+#contenu des fichiers
+coledit.py ==> connecte un utilisateur a un document
 
-servedit.py ==> manage acess issues on document
+servedit.py ==> gère les accès sur un document (écritures/suppressions)
 
-tool.py ==> some commons functions in order to use in all parts of the source code
+tool.py ==> fonctions utilitaires au projet
 
-person.py ==> symbolize a person (Class)
+person.py ==> reoprésente une person (Class)
 
-coleditargs.py ==> rules of the command line for coledit.py
+coleditargs.py ==> contraintes pour la ligne de commande utilisé par coledit.py
 
-serveditargs.py ==> rules of the command line for servedit.py
+serveditargs.py ==> contraintes pour la ligne de commande utilisé par servedit.py
+
+threadrafraichir.py ==> thread permettant de rafraichir un client
 
 ##TO DO
 
@@ -28,7 +30,7 @@ DANS SERVEDIT.PY ET COLEDIT.PY
 
 *utilisation  des arguments en ligne de commande se base sur coleditargs.py et serveditargs.py 
 
-***client qui peut se connecter, s'authentifier
+*client qui peut se connecter, s'authentifier
 
 *serveur qui initialise et créer les utilisateurs, gère la gestion des accès pour chaque document (ajout ou suppression)
 
