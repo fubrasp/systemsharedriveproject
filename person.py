@@ -11,11 +11,11 @@ from constants import *
 """
 class Person():
 
-    # Construct a Person
+    # Constructeur de Person
     def __init__(self, login, color):
         self.login = login
         self.color = color
 
-    # Print his attributes
+    # Methode renvoyant les attributs d'une personne
     def __repr__(self):
         return str(self.login)+" "+str(self.color)
