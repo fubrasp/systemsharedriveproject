@@ -19,7 +19,6 @@ def args(LISTE_ARGUMENTS):
 
     return ARGS_LISTE
 
-
 def verifierServeurEnLigne(CMD_SERVEUR):
     os.system(CMD_VERIFIER_SERVEUR_EN_LIGNE + " >tmp")
     RES = open('tmp', 'r').read()
@@ -59,27 +58,9 @@ def associerUtilisateursAUnFichier(DOCUMENT, NB_UTILISATEURS):
 
     return LISTE_UTILISATEURS
 
-
 def creerFichier(NOM_FICHIER):
     if os.path.exists(DOSSIER_FICHIERS_TXT + NOM_FICHIER) == False :
         os.system("touch " + DOSSIER_FICHIERS_TXT + NOM_FICHIER)
-    #else :
-    #    print("\n=> Le fichier " + NOM_FICHIER + " existe déjà et voici son contenu : \n")
-    #    lireDansDoc(DOSSIER_FICHIERS_TXT + NOM_FICHIER)
-    #    print("\n=> Choisissez un nom de fichier non-existant pour lancer le serveur")
-    #    sys.exit()
-
-#def finirSession(NOM_FICHIER, MESSAGE):
-#    os.system("git add " + NOM_FICHIER)
-#    os.system("git commit -m " + MESSAGE + "")
-#    os.system("git push")
-
-#def initialiserGitRepo(DOSSIER):
-#    os.system("git init " + DOSSIER)
-
-
-#def suivreGitRepo(DOSSIER):
-#    os.system("git log " + DOSSIER)
 
 #fonctions sytemes usuelles
 def effacerConsole():
@@ -130,22 +111,3 @@ def rafraichirClient(ARGS):
     lireDansDoc(DOSSIER_FICHIERS_TXT + ARGS)
     print("[TAPEZ EXIT POUR QUITTER L'EDITION DU FICHIER " + ARGS + "]")
     print(">> ")
-
-
-#def envoyerDonnees(REP, ARGUMENTS, followThread, s):
-#    print("Vous allez travailler sur le document : " + ARGUMENTS[DOCUMENT])
-#
-#    # On boucle tant que le client ne quitte pas il peut écrire :
-#    followThread.start()
-#
-#    s.send(REP.encode())
-#    TEXTE_A_TRANSMETTRE = INIT_STRING
-#    s.send(REP.encode())
-#    while TEXTE_A_TRANSMETTRE != CMD_QUITTER_EDITION and TEXTE_A_TRANSMETTRE != CMD_QUITTER_EDITION.upper():
-#        effacerConsole()  # À chaque ajout, on nettoie la console
-#
-#        lireDansDoc(DOSSIER_FICHIERS_TXT + ARGUMENTS[DOCUMENT])  # On affiche le document
-#
-#        print("[TAPEZ EXIT POUR QUITTER L'EDITION DU FICHIER " + ARGUMENTS[DOCUMENT] + "]")
-#        TEXTE_A_TRANSMETTRE = input(">> ")
-#        s.send(TEXTE_A_TRANSMETTRE.encode())

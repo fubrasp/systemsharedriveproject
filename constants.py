@@ -19,7 +19,6 @@ LISTE_UTILISATEURS = []
 MSG_UILISTEUR_SERVEUR_HORS_LIGNE="Le serveur n'est pas en route, lancez-le afin d'y accéder"
 
 # --> Messages relatifs à l'authentification
-#EST_AUTHENTIFIE = " est authentifié"
 NEST_PAS_AUTHENTIFIE = "Erreur d'authentification E/S"
 AUTHENTIFICATION_IMPOSSIBLE="Authentification impossible, vérifiez vos identifiants s'il vous plaît : 1) nom d'utilisateur, 2) " "fichier souhaité"
 

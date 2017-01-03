@@ -1,5 +1,0 @@
-user0:color0
-user1:color1
-user2:color2
-user3:color3
-user4:color4
