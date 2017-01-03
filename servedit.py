@@ -21,12 +21,12 @@ DOCUMENT_COURANT = creerFichier(ARGUMENTS[DOCUMENT])
 NB_UTILISATEURS = int(input(QUESTION_NB_UTILISATEURS + ARGUMENTS[DOCUMENT] + " ? "))
 
 # Création des utilisateurs suivant le nombre soumis + on associe 1 couleur / utilisateur
-if os.path.exists(DOSSIER_UTILISATEURS_FICHIERS_TXT+ARGUMENTS[DOCUMENT]) == False:
-    LISTE_UTILISATEURS = associerUtilisateursAUnFichier(ARGUMENTS[DOCUMENT], NB_UTILISATEURS)
-    print("TEST CREATE USERS")
-else:
-    LISTE_UTILISATEURS = lireDansDoc(DOSSIER_UTILISATEURS_FICHIERS_TXT+ARGUMENTS[DOCUMENT])
-    print("NOT A NEED TO CREATE USERS")
+#if os.path.exists(DOSSIER_UTILISATEURS_FICHIERS_TXT+ARGUMENTS[DOCUMENT]) == False:
+LISTE_UTILISATEURS = associerUtilisateursAUnFichier(ARGUMENTS[DOCUMENT], NB_UTILISATEURS)
+#    print("TEST CREATE USERS")
+#else:
+#    LISTE_UTILISATEURS = lireDansDoc(DOSSIER_UTILISATEURS_FICHIERS_TXT+ARGUMENTS[DOCUMENT])
+#    print("NOT A NEED TO CREATE USERS")
 
 # Affichage des utilisateurs
 print("Les utilisateurs qui auront accès à votre fichier sont les suivants : ")
